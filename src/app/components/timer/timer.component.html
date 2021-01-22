@@ -1,0 +1,71 @@
+<div class="glass-card">
+  <div class="wrapper">
+    <div class="main-timer" (window:resize)="OnResize($event)" [style.font-size]="mainfontsize">
+      {{DisplayTime()}}
+    </div>
+    <!-- <div class="new-time" id="new-item">
+      <div class="new-item-container">
+        <div class="new-item-line" (click)="open(mymodal)"></div>
+      </div>
+    </div> -->
+    <div class="interval-list">
+      <table class="table table-striped">
+        <thead>
+          <td scope="col">Name</td>
+          <td scope="col">Time</td>
+          <td scope="col">Repetitions</td>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let t of allInterval | keyvalue">
+            <td scope="row"> {{ t.value.Name }} </td>
+            <td> {{ t.value.Seconds }} </td>
+            <td> {{ t.value.Repetitions }} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ribbon">
+      <div class="ribbon-container">
+        <img src="/assets/images/new.svg" alt="" class="timer-control timer-control-new" (click)="open(mymodal)">
+        <img src="/assets/images/{{imgNme}}.svg" alt="" class="timer-control" (click)="RunTimer()">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Interval</h4>
+    <a class="close" style="cursor: pointer;" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </a>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div *ngIf="!validationStatus" class="alert-danger">
+        <span class="text-danger">{{ validationMessage }}</span>
+      </div>
+      <br>
+      <form [formGroup]="newIntervalFormGroup" (ngSubmit)="AddNewInterval()" class="form" enctype="multipart/form-data">
+        <div class="form-group">
+          <div class="input-group controls">
+            <input formControlName="newIntervalKey" type="text" class="form-field" placeholder="Interval Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group controls">
+            <div class="interval-input">
+              <div class="interval timer-btn interval-increase" (click)="IncreaseInterval()">^</div>
+              <div class="new-interval-holder">
+                {{ NewInterval.value }} Sec
+              </div>
+              <div class="interval timer-btn interval-decrease" (click)="DecreaseInterval()">^</div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" style="float: right;" class="timer-btn">Add</button>
+      </form>
+    </div>
+  </div>
+</ng-template>
