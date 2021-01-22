@@ -1,34 +1,41 @@
-<div class="glass-card">
-  <div class="wrapper">
-    <div class="main-timer" (window:resize)="OnResize($event)" [style.font-size]="mainfontsize">
-      {{DisplayTime()}}
-    </div>
-    <!-- <div class="new-time" id="new-item">
-      <div class="new-item-container">
-        <div class="new-item-line" (click)="open(mymodal)"></div>
+<div style="position: relative;">
+  <div class="glass-card">
+    <div class="wrapper">
+      <div class="main-timer" (window:resize)="OnResize($event)" [style.font-size]="mainfontsize">
+        {{DisplayTime()}}
       </div>
-    </div> -->
-    <div class="interval-list">
-      <table class="table table-striped">
-        <thead>
-          <td scope="col">Name</td>
-          <td scope="col">Time</td>
-          <td scope="col">Repetitions</td>
-        </thead>
-        <tbody>
-          <tr mdbTableCol *ngFor="let t of allInterval | keyvalue">
-            <td scope="row"> {{ t.value.Name }} </td>
-            <td> {{ t.value.Seconds }} </td>
-            <td> {{ t.value.Repetitions }} </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="ribbon">
-      <div class="ribbon-container">
-        <img src="/assets/images/new.svg" alt="" class="timer-control timer-control-new" (click)="open(mymodal)">
-        <img src="/assets/images/{{imgNme}}.svg" alt="" class="timer-control" (click)="RunTimer()">
+      <!-- <div class="new-time" id="new-item">
+        <div class="new-item-container">
+          <div class="new-item-line" (click)="open(mymodal)"></div>
+        </div>
+      </div> -->
+      <div class="interval-list">
+        <table class="table table-striped">
+          <thead>
+            <td scope="col">Name</td>
+            <td scope="col">Time</td>
+            <td scope="col">Repetitions</td>
+          </thead>
+          <tbody>
+            <tr mdbTableCol *ngFor="let t of allInterval | keyvalue">
+              <td scope="row"> {{ t.value.Name }} </td>
+              <td> {{ t.value.Seconds }} </td>
+              <td> {{ t.value.Repetitions }} </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <div class="ribbon">
+        <div class="ribbon-container">
+          <img src="/assets/images/new.svg" alt="" class="timer-control timer-control-new" (click)="open(mymodal)">
+          <img src="/assets/images/{{imgNme}}.svg" alt="" class="timer-control" (click)="RunTimer()">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="progress interval-progress">
+    <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="intervalprogress" aria-valuemin="0" aria-valuemax="100"
+      [ngStyle]="{'width': intervalprogress + '%'}">
     </div>
   </div>
 </div>

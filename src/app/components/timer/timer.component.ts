@@ -24,6 +24,8 @@ export class TimerComponent implements OnInit {
     imgNme = 'play';
     mainfontsize: string;
 
+    intervalprogress: number;
+
     @ViewChild('mymodal')
     private newItemModal: TemplateRef<any>;
 
@@ -46,6 +48,8 @@ export class TimerComponent implements OnInit {
         this.allInterval.set('First13', new Timer('first2', 10));
         this.allInterval.set('First14', new Timer('first3', 10));
         this.allInterval.set('First15', new Timer('first4', 10));
+
+        this.intervalprogress = 0;
     }
 
     ngOnInit(): void {
@@ -68,6 +72,7 @@ export class TimerComponent implements OnInit {
         }
         this.timerIntervalId = setInterval(() => {
             this.mainTimerSeconds += 1;
+            this.CalculateProgress();
             this.CalculateTimer();
         }, 1000);
     }
@@ -118,6 +123,11 @@ export class TimerComponent implements OnInit {
             this.mainTimerHours += Math.trunc(this.mainTimerMinutes / 60);
             this.mainTimerMinutes = this.mainTimerMinutes % 60;
         }
+    }
+
+    CalculateProgress(): void {
+        //chnge hrdcoded 60 to intervl seconds
+        this.intervalprogress = ((this.mainTimerSeconds * 100) / 60);
     }
 
     AddNewInterval(): void {
