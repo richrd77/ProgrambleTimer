@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\timer"
+  ],
+  "SelectedNode": "\\src\\app\\components\\timer\\timer.component.ts",
+  "PreviewInSolutionExplorer": false
+}

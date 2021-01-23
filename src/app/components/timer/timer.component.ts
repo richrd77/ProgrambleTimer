@@ -17,37 +17,38 @@ export class TimerComponent implements OnInit {
     validationStatus = true;
     validationMessage: string;
     mainTimerSeconds = 0;
+    mainTimerSecondsRaw = 0;
     mainTimerMinutes = 0;
     mainTimerHours = 0;
     timerIntervalId: any;
     isRunning: boolean;
     imgNme = 'play';
     mainfontsize: string;
-
     intervalprogress: number;
+    currentIntervalNme: string;
 
     @ViewChild('mymodal')
     private newItemModal: TemplateRef<any>;
 
     constructor(private modalService: NgbModal) {
         this.allInterval = new Map<string, Timer>();
-        this.allInterval.set('First', new Timer('first', 10));
-        this.allInterval.set('First1', new Timer('first1', 10));
-        this.allInterval.set('First2', new Timer('first2', 10));
-        this.allInterval.set('First3', new Timer('first3', 10));
-        this.allInterval.set('First4', new Timer('first4', 10));
-        this.allInterval.set('First5', new Timer('first2', 10));
-        this.allInterval.set('First6', new Timer('first3', 10));
-        this.allInterval.set('First7', new Timer('first4', 10));
+        this.allInterval.set('First', new Timer('First', 10));
+        this.allInterval.set('First1', new Timer('First1', 10));
+        this.allInterval.set('First2', new Timer('First2', 10));
+        this.allInterval.set('First3', new Timer('First3', 10));
+        this.allInterval.set('First4', new Timer('First4', 10));
+        this.allInterval.set('First5', new Timer('First5', 10));
+        this.allInterval.set('First6', new Timer('First6', 10));
+        this.allInterval.set('First7', new Timer('First7', 10));
 
-        this.allInterval.set('First8', new Timer('first', 10));
-        this.allInterval.set('First9', new Timer('first1', 10));
-        this.allInterval.set('First10', new Timer('first2', 10));
-        this.allInterval.set('First11', new Timer('first3', 10));
-        this.allInterval.set('First12', new Timer('first4', 10));
-        this.allInterval.set('First13', new Timer('first2', 10));
-        this.allInterval.set('First14', new Timer('first3', 10));
-        this.allInterval.set('First15', new Timer('first4', 10));
+        this.allInterval.set('First8', new Timer('First8', 10));
+        this.allInterval.set('First9', new Timer('First9', 10));
+        this.allInterval.set('First10', new Timer('First10', 10));
+        this.allInterval.set('First11', new Timer('First11', 10));
+        this.allInterval.set('First12', new Timer('First12', 10));
+        this.allInterval.set('First13', new Timer('First13', 10));
+        this.allInterval.set('First14', new Timer('First14', 10));
+        this.allInterval.set('First15', new Timer('First15', 10));
 
         this.intervalprogress = 0;
     }
@@ -65,6 +66,7 @@ export class TimerComponent implements OnInit {
     }
 
     StartTimer(): void {
+        this.currentIntervalNme = this.allInterval.values().next().value.Name;
         this.isRunning = true;
         this.ChngeIcon();
         if (this.timerIntervalId) {
@@ -72,6 +74,7 @@ export class TimerComponent implements OnInit {
         }
         this.timerIntervalId = setInterval(() => {
             this.mainTimerSeconds += 1;
+            this.mainTimerSecondsRaw += 1;
             this.CalculateProgress();
             this.CalculateTimer();
         }, 1000);
@@ -94,7 +97,6 @@ export class TimerComponent implements OnInit {
     }
 
     RunTimer(): void {
-        debugger;
         if (this.isRunning) {
             this.StopTimer();
         } else {
@@ -114,7 +116,6 @@ export class TimerComponent implements OnInit {
     }
 
     CalculateTimer(): void {
-        console.log(this.mainTimerHours + '|' + this.mainTimerMinutes + '|' + this.mainTimerSeconds);
         if (this.mainTimerSeconds === 60) {
             this.mainTimerMinutes += Math.trunc(this.mainTimerSeconds / 60);
             this.mainTimerSeconds = this.mainTimerSeconds % 60;
@@ -126,14 +127,14 @@ export class TimerComponent implements OnInit {
     }
 
     CalculateProgress(): void {
+        const currentItem = this.allInterval.get(this.currentIntervalNme);
+
         //chnge hrdcoded 60 to intervl seconds
         this.intervalprogress = ((this.mainTimerSeconds * 100) / 60);
     }
 
     AddNewInterval(): void {
-        //console.log(this.NewIntervalKey);
         if (Number(this.NewInterval.value) > 0 && this.NewIntervalKey.value) {
-            console.log(this.allInterval);
             if (this.allInterval.has(this.NewIntervalKey.value)) {
                 this.ShowValidationError('Try different Name for this interval');
             } else {
