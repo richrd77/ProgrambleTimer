@@ -33,22 +33,8 @@ export class TimerComponent implements OnInit {
 
     constructor(private modalService: NgbModal) {
         this.allInterval = [
-            new Timer('First', 10),
-            new Timer('First1', 10),
-            new Timer('First2', 10),
-            new Timer('First3', 10),
-            new Timer('First4', 10),
-            new Timer('First5', 10),
-            new Timer('First6', 10),
-            new Timer('First7', 10),
-            new Timer('First8', 10),
-            new Timer('First9', 10),
-            new Timer('First10', 10),
-            new Timer('First11', 10),
-            new Timer('First12', 10),
-            new Timer('First13', 10),
-            new Timer('First14', 10),
-            new Timer('First15', 10)
+            new Timer('First', 10, '#93984A'),
+            new Timer('Second', 120, '#7E1DC5'),
         ];
 
         this.intervalprogress = 0;
@@ -136,7 +122,7 @@ export class TimerComponent implements OnInit {
                 this.currentIndex = 0;
             }
             this.currentItem = this.allInterval[this.currentIndex];
-            this.currentItem.Color = this.getRandomColor();
+            //this.currentItem.Color = this.getRandomColor();
             this.mainTimerSecondsRaw = 0;
         }
         //chnge hrdcoded 60 to intervl seconds
@@ -144,11 +130,16 @@ export class TimerComponent implements OnInit {
     }
 
     StyleProgress() {
-        if (this.intervalprogress === 0) {
+        //if (this.intervalprogress === 0) 
+        {
             return { 'width': this.intervalprogress + '%', 'background-color': this.currentItem?.Color };
-        } else {
-            return { 'width': this.intervalprogress + '%' };
-        }
+        }// else {
+        //     return { 'width': this.intervalprogress + '%' };
+        // }
+    }
+
+    getEl(t: Timer) {
+        return { 'background-color': t.Color }
     }
 
     AddNewInterval(): void {

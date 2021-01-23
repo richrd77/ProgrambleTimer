@@ -15,6 +15,7 @@
             <td scope="col">Name</td>
             <td scope="col">Time</td>
             <td scope="col">Repetitions</td>
+            <td scope="col"></td>
           </thead>
           <tbody>
             <tr mdbTableCol *ngFor="let t of allInterval | keyvalue; let i = index"
@@ -22,6 +23,8 @@
               <td scope="row"> {{ t.value.Name }} </td>
               <td> {{ t.value.Seconds }} </td>
               <td> {{ t.value.Repetitions }} </td>
+              <td> <span style="height: 1rem;width:1rem;color: transparent;" [ngStyle]="getEl(t.value)">
+                  Color</span></td>
             </tr>
           </tbody>
         </table>
