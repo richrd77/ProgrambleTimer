@@ -10,14 +10,13 @@ import { Timer } from '../../model/timer';
     styleUrls: ['timer.component.scss']
 })
 export class TimerComponent implements OnInit {
-    allInterval: Map<string, Timer>
+    allInterval: Array<Timer>
     closeResult = '';
     newIntervalFormGroup: FormGroup;
     intervalStep = 5;
     validationStatus = true;
     validationMessage: string;
     mainTimerSeconds = 0;
-    mainTimerSecondsRaw = 0;
     mainTimerMinutes = 0;
     mainTimerHours = 0;
     timerIntervalId: any;
@@ -25,32 +24,35 @@ export class TimerComponent implements OnInit {
     imgNme = 'play';
     mainfontsize: string;
     intervalprogress: number;
-    currentIntervalNme: string;
+    currentItem: Timer;
+    currentIndex: number;
+    mainTimerSecondsRaw = 0;
 
     @ViewChild('mymodal')
     private newItemModal: TemplateRef<any>;
 
     constructor(private modalService: NgbModal) {
-        this.allInterval = new Map<string, Timer>();
-        this.allInterval.set('First', new Timer('First', 10));
-        this.allInterval.set('First1', new Timer('First1', 10));
-        this.allInterval.set('First2', new Timer('First2', 10));
-        this.allInterval.set('First3', new Timer('First3', 10));
-        this.allInterval.set('First4', new Timer('First4', 10));
-        this.allInterval.set('First5', new Timer('First5', 10));
-        this.allInterval.set('First6', new Timer('First6', 10));
-        this.allInterval.set('First7', new Timer('First7', 10));
-
-        this.allInterval.set('First8', new Timer('First8', 10));
-        this.allInterval.set('First9', new Timer('First9', 10));
-        this.allInterval.set('First10', new Timer('First10', 10));
-        this.allInterval.set('First11', new Timer('First11', 10));
-        this.allInterval.set('First12', new Timer('First12', 10));
-        this.allInterval.set('First13', new Timer('First13', 10));
-        this.allInterval.set('First14', new Timer('First14', 10));
-        this.allInterval.set('First15', new Timer('First15', 10));
+        this.allInterval = [
+            new Timer('First', 10),
+            new Timer('First1', 10),
+            new Timer('First2', 10),
+            new Timer('First3', 10),
+            new Timer('First4', 10),
+            new Timer('First5', 10),
+            new Timer('First6', 10),
+            new Timer('First7', 10),
+            new Timer('First8', 10),
+            new Timer('First9', 10),
+            new Timer('First10', 10),
+            new Timer('First11', 10),
+            new Timer('First12', 10),
+            new Timer('First13', 10),
+            new Timer('First14', 10),
+            new Timer('First15', 10)
+        ];
 
         this.intervalprogress = 0;
+        this.currentIndex = 0;
     }
 
     ngOnInit(): void {
@@ -66,7 +68,7 @@ export class TimerComponent implements OnInit {
     }
 
     StartTimer(): void {
-        this.currentIntervalNme = this.allInterval.values().next().value.Name;
+        this.currentItem = this.allInterval[this.currentIndex];
         this.isRunning = true;
         this.ChngeIcon();
         if (this.timerIntervalId) {
@@ -127,24 +129,49 @@ export class TimerComponent implements OnInit {
     }
 
     CalculateProgress(): void {
-        const currentItem = this.allInterval.get(this.currentIntervalNme);
-
+        if (this.currentItem.Seconds === this.mainTimerSecondsRaw) {
+            this.allInterval[this.currentIndex].Repetitions += 1;
+            this.currentIndex += 1;
+            if (this.currentIndex === this.allInterval.length) {
+                this.currentIndex = 0;
+            }
+            this.currentItem = this.allInterval[this.currentIndex];
+            this.currentItem.Color = this.getRandomColor();
+            this.mainTimerSecondsRaw = 0;
+        }
         //chnge hrdcoded 60 to intervl seconds
-        this.intervalprogress = ((this.mainTimerSeconds * 100) / 60);
+        this.intervalprogress = ((this.mainTimerSecondsRaw * 100) / this.currentItem.Seconds);
+    }
+
+    StyleProgress() {
+        if (this.intervalprogress === 0) {
+            return { 'width': this.intervalprogress + '%', 'background-color': this.currentItem?.Color };
+        } else {
+            return { 'width': this.intervalprogress + '%' };
+        }
     }
 
     AddNewInterval(): void {
-        if (Number(this.NewInterval.value) > 0 && this.NewIntervalKey.value) {
-            if (this.allInterval.has(this.NewIntervalKey.value)) {
-                this.ShowValidationError('Try different Name for this interval');
-            } else {
-                this.ClearValidationError();
-                this.allInterval.set(this.NewIntervalKey.value, new Timer(this.NewIntervalKey.value, Number(this.NewInterval.value)));
-                this.modalService.dismissAll('');
-            }
-        } else {
-            this.ShowValidationError('One or more details are missing');
+        // if (Number(this.NewInterval.value) > 0 && this.NewIntervalKey.value) {
+        //     if (this.allInterval.has(this.NewIntervalKey.value)) {
+        //         this.ShowValidationError('Try different Name for this interval');
+        //     } else {
+        //         this.ClearValidationError();
+        //         this.allInterval.set(this.NewIntervalKey.value, new Timer(this.NewIntervalKey.value, Number(this.NewInterval.value)));
+        //         this.modalService.dismissAll('');
+        //     }
+        // } else {
+        //     this.ShowValidationError('One or more details are missing');
+        // }
+    }
+
+    getRandomColor(): string {
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
         }
+        return color;
     }
 
     IncreaseInterval() {

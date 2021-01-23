@@ -17,7 +17,8 @@
             <td scope="col">Repetitions</td>
           </thead>
           <tbody>
-            <tr mdbTableCol *ngFor="let t of allInterval | keyvalue">
+            <tr mdbTableCol *ngFor="let t of allInterval | keyvalue; let i = index"
+              [ngClass]="currentItem && currentItem.Name == t.value.Name ? 'active-row':''">
               <td scope="row"> {{ t.value.Name }} </td>
               <td> {{ t.value.Seconds }} </td>
               <td> {{ t.value.Repetitions }} </td>
@@ -34,8 +35,8 @@
     </div>
   </div>
   <div class="progress interval-progress">
-    <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="intervalprogress" aria-valuemin="0" aria-valuemax="100"
-      [ngStyle]="{'width': intervalprogress + '%'}">
+    <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="intervalprogress" aria-valuemin="0"
+      aria-valuemax="100" [ngStyle]="StyleProgress()">
     </div>
   </div>
 </div>

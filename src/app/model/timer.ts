@@ -7,5 +7,6 @@ export class Timer {
     constructor(intervalName: string, intervalSeconds: number) {
         this.Name = intervalName;
         this.Seconds = intervalSeconds;
+        this.Repetitions = 0;
     }
 }

@@ -24,6 +24,11 @@ $bgColor: white;
     background-color: transparent;
 }
 
+.active-row {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
 .wrapper {
     height: 100vh;
     position: relative;
