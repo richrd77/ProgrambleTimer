@@ -45,7 +45,7 @@
         <div class="modal-body">
           <div [ngSwitch]="menuItemName">
             <div *ngSwitchCase="'New-Item'">
-              <app-new-interval></app-new-interval>
+              <app-new-interval (newlyCreatedItem)="NewTimerEvent($event)" [existingColors]="allColors"></app-new-interval>
             </div>
             <div *ngSwitchCase="'list'">
               <app-interval-list [allInterval]="allInterval"></app-interval-list>

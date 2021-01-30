@@ -9,6 +9,7 @@ import { TimerComponent } from './components/timer/timer.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NewIntervalComponent } from './components/new-interval/new-interval.component';
 import { IntervalListComponent } from './components/interval-list/interval-list.component';
+import { Extensions } from './services/extensions';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { IntervalListComponent } from './components/interval-list/interval-list.
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [Extensions],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
