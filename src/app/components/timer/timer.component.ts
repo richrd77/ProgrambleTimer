@@ -1,15 +1,15 @@
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Timer } from '../../model/timer';
 
 @Component({
-    selector: 'timer',
+    selector: 'app-timer',
     templateUrl: 'timer.component.html',
-    styleUrls: ['timer.component.scss']
+    styleUrls: ['timer.component.scss', 'timer-mobile.component.scss']
 })
 export class TimerComponent implements OnInit {
-    allInterval: Array<Timer>
+    allInterval: Array<Timer>;
     closeResult = '';
     newIntervalFormGroup: FormGroup;
     intervalStep = 5;
@@ -26,6 +26,7 @@ export class TimerComponent implements OnInit {
     currentItem: Timer;
     currentIndex: number;
     mainTimerSecondsRaw = 0;
+    menuItemName: string;
 
     @ViewChild('mymodal')
     private newItemModal: TemplateRef<any>;
@@ -87,11 +88,12 @@ export class TimerComponent implements OnInit {
         if (this.isRunning) {
             this.StopTimer();
         } else {
-            this.StartTimer()
+            this.StartTimer();
         }
     }
 
     DisplayTime(): string {
+        // tslint:disable-next-line: max-line-length
         return `${this.GetDisplayableTime(this.mainTimerHours)}:${this.GetDisplayableTime(this.mainTimerMinutes)}:${this.GetDisplayableTime(this.mainTimerSeconds)}`;
     }
 
@@ -121,86 +123,40 @@ export class TimerComponent implements OnInit {
                 this.currentIndex = 0;
             }
             this.currentItem = this.allInterval[this.currentIndex];
-            //this.currentItem.Color = this.getRandomColor();
+            // this.currentItem.Color = this.getRandomColor();
             this.mainTimerSecondsRaw = 0;
         }
-        //chnge hrdcoded 60 to intervl seconds
+        // chnge hrdcoded 60 to intervl seconds
         this.intervalprogress = ((this.mainTimerSecondsRaw * 100) / this.currentItem.Seconds);
     }
 
     StyleProgress() {
-        //if (this.intervalprogress === 0) 
+        // if (this.intervalprogress === 0)
         {
-            return { 'width': this.intervalprogress + '%', 'background-color': this.currentItem?.Color };
+            return { width: this.intervalprogress + '%', 'background-color': this.currentItem?.Color };
         }// else {
         //     return { 'width': this.intervalprogress + '%' };
         // }
     }
 
-    getEl(t: Timer) {
-        return { 'background-color': t.Color }
-    }
-
-    AddNewInterval(): void {
-        // if (Number(this.NewInterval.value) > 0 && this.NewIntervalKey.value) {
-        //     if (this.allInterval.has(this.NewIntervalKey.value)) {
-        //         this.ShowValidationError('Try different Name for this interval');
-        //     } else {
-        //         this.ClearValidationError();
-        //         this.allInterval.set(this.NewIntervalKey.value, new Timer(this.NewIntervalKey.value, Number(this.NewInterval.value)));
-        //         this.modalService.dismissAll('');
-        //     }
-        // } else {
-        //     this.ShowValidationError('One or more details are missing');
-        // }
-    }
-
     getRandomColor(): string {
-        let letters = '0123456789ABCDEF';
+        const letters = '0123456789ABCDEF';
         let color = '#';
-        for (var i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++) {
             color += letters[Math.floor(Math.random() * 16)];
         }
         return color;
     }
 
-    IncreaseInterval() {
-        this.NewInterval.setValue(Number(this.NewInterval.value) + this.intervalStep);
-    }
-
-    DecreaseInterval() {
-        if (Number(this.NewInterval.value) > 0) {
-            this.NewInterval.setValue(Number(this.NewInterval.value) - this.intervalStep);
-        }
-    }
-
-    get NewIntervalKey() {
-        return this.newIntervalFormGroup.get('newIntervalKey');
-    }
-
-    get NewInterval() {
-        return this.newIntervalFormGroup.get('newInterval');
-    }
-
-    ShowValidationError(msg: string) {
-        this.validationStatus = false;
-        this.validationMessage = msg;
-    }
-
-    ClearValidationError() {
-        this.validationStatus = true;
-        this.validationMessage = '';
-    }
-
     open(content: any) {
         this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-            this.NewInterval.setValue(0);
-            this.NewIntervalKey.setValue('');
-            this.ClearValidationError();
+//            this.NewInterval.setValue(0);
+//            this.NewIntervalKey.setValue('');
+//            this.ClearValidationError();
         }, (reason) => {
-            this.NewInterval.setValue(0);
-            this.NewIntervalKey.setValue('');
-            this.ClearValidationError();
+//            this.NewInterval.setValue(0);
+//            this.NewIntervalKey.setValue('');
+//            this.ClearValidationError();
         });
     }
 
@@ -212,6 +168,11 @@ export class TimerComponent implements OnInit {
         } else {
             return `with: ${reason}`;
         }
+    }
+
+    RibbonItemClickEvent(name: string) {
+        this.menuItemName = name;
+        this.open(this.newItemModal);
     }
 
 }

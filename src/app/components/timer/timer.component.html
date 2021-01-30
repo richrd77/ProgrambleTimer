@@ -8,57 +8,25 @@
       >
         {{ DisplayTime() }}
       </div>
-      <!-- <div class="new-time" id="new-item">
-        <div class="new-item-container">
-          <div class="new-item-line" (click)="open(mymodal)"></div>
-        </div>
-      </div> -->
-      <div class="interval-list">
-        <table class="table table-striped">
-          <thead>
-            <td scope="col">Name</td>
-            <td scope="col">Time</td>
-            <td scope="col">Repetitions</td>
-            <td scope="col"></td>
-          </thead>
-          <tbody>
-            <tr
-              mdbTableCol
-              *ngFor="let t of allInterval | keyvalue; let i = index"
-              [ngClass]="
-                currentItem && currentItem.Name == t.value.Name
-                  ? 'active-row'
-                  : ''
-              "
-            >
-              <td scope="row">{{ t.value.Name }}</td>
-              <td>{{ t.value.Seconds }}</td>
-              <td>{{ t.value.Repetitions }}</td>
-              <td>
-                <span
-                  style="height: 1rem; width: 1rem; color: transparent"
-                  [ngStyle]="getEl(t.value)"
-                >
-                  Color</span
-                >
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
       <div class="ribbon">
         <div class="ribbon-container">
           <img
             src="./assets/images/new.svg"
             alt=""
             class="timer-control timer-control-new"
-            (click)="open(mymodal)"
+            (click)="RibbonItemClickEvent('New-Item')"
           />
           <img
             src="./assets/images/{{ imgNme }}.svg"
             alt=""
             class="timer-control"
             (click)="RunTimer()"
+          />
+          <img
+            src="./assets/images/list.svg"
+            alt=""
+            class="timer-control"
+            (click)="RibbonItemClickEvent('list')"
           />
         </div>
       </div>
@@ -75,52 +43,13 @@
           </a>
         </div>
         <div class="modal-body">
-          <div class="container">
-            <div *ngIf="!validationStatus" class="alert-danger">
-              <span class="text-danger">{{ validationMessage }}</span>
+          <div [ngSwitch]="menuItemName">
+            <div *ngSwitchCase="'New-Item'">
+              <app-new-interval></app-new-interval>
             </div>
-            <br />
-            <form
-              [formGroup]="newIntervalFormGroup"
-              (ngSubmit)="AddNewInterval()"
-              class="form"
-              enctype="multipart/form-data"
-            >
-              <div class="form-group">
-                <div class="input-group controls">
-                  <input
-                    formControlName="newIntervalKey"
-                    type="text"
-                    class="form-field"
-                    placeholder="Interval Name"
-                  />
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group controls">
-                  <div class="interval-input">
-                    <div
-                      class="interval timer-btn interval-increase up-down-btn"
-                      (click)="IncreaseInterval()"
-                    >
-                      ^
-                    </div>
-                    <div class="new-interval-holder">
-                      {{ NewInterval.value }} Sec
-                    </div>
-                    <div
-                      class="interval timer-btn interval-decrease up-down-btn"
-                      (click)="DecreaseInterval()"
-                    >
-                      ^
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <button type="submit" style="float: right" class="timer-btn">
-                Add
-              </button>
-            </form>
+            <div *ngSwitchCase="'list'">
+              <app-interval-list [allInterval]="allInterval"></app-interval-list>
+            </div>
           </div>
         </div>
       </ng-template>

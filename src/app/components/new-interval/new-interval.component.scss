@@ -1,0 +1,43 @@
+.form-field {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+.interval-input {
+  width: 100%;
+  user-select: none;
+}
+
+.interval {
+  font-size: 2rem;
+  text-decoration: none;
+  width: 10%;
+  display: inline-block;
+}
+
+.interval-decrease {
+  transform: rotate(-180deg);
+}
+
+.new-interval-holder {
+  display: inline-block;
+  font-family: D7CMB;
+  font-size: 2.5rem;
+  width: 50%;
+  text-align: right;
+  margin-right: 0.5rem;
+}
+
+.timer-btn {
+  border: solid 2px rgba(0, 0, 0, 0.8);
+  background-color: var(--bgColor);
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.timer-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}

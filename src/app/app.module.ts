@@ -7,11 +7,15 @@ import { AppComponent } from './app.component';
 import { TimerComponent } from './components/timer/timer.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NewIntervalComponent } from './components/new-interval/new-interval.component';
+import { IntervalListComponent } from './components/interval-list/interval-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TimerComponent
+    TimerComponent,
+    NewIntervalComponent,
+    IntervalListComponent
   ],
   imports: [
     BrowserModule,
