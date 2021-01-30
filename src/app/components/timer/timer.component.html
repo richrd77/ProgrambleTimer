@@ -10,24 +10,10 @@
       </div>
       <div class="ribbon">
         <div class="ribbon-container">
-          <img
-            src="./assets/images/new.svg"
-            alt=""
-            class="timer-control timer-control-new"
-            (click)="RibbonItemClickEvent('New-Item')"
-          />
-          <img
-            src="./assets/images/{{ imgNme }}.svg"
-            alt=""
-            class="timer-control"
-            (click)="RunTimer()"
-          />
-          <img
-            src="./assets/images/list.svg"
-            alt=""
-            class="timer-control"
-            (click)="RibbonItemClickEvent('list')"
-          />
+          <app-plus-img [imgColor]="'black'" (clickEventListener)="RibbonItemClickEvent('New-Item')"></app-plus-img>
+          <app-play-img *ngIf="!isRunning" [imgColor]="'black'" (clickEventListener)="RunTimer()"></app-play-img>
+          <app-pause-img *ngIf="isRunning" [imgColor]="'black'" (clickEventListener)="RunTimer()"></app-pause-img>
+          <app-list-img [imgColor]="'black'" (clickEventListener)="RibbonItemClickEvent('list')"></app-list-img>
         </div>
       </div>
       <ng-template #mymodal let-modal>

@@ -10,13 +10,21 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NewIntervalComponent } from './components/new-interval/new-interval.component';
 import { IntervalListComponent } from './components/interval-list/interval-list.component';
 import { Extensions } from './services/extensions';
+import { ListImgComponent } from './components/imgs/list.component';
+import { PauseImgComponent } from './components/imgs/pause.component';
+import { PlayImgComponent } from './components/imgs/play.component';
+import { PlusImgComponent } from './components/imgs/plus.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TimerComponent,
     NewIntervalComponent,
-    IntervalListComponent
+    IntervalListComponent,
+    ListImgComponent,
+    PauseImgComponent,
+    PlayImgComponent,
+    PlusImgComponent
   ],
   imports: [
     BrowserModule,
