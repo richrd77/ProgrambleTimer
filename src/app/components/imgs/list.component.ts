@@ -23,7 +23,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       @media only screen and (max-width: 415px) and (orientation: portrait) {
         .list-img-class {
           height: 100%;
-          width: 50%;
+          width: 40%;
         }
       }
     `,

@@ -23,7 +23,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       @media only screen and (max-width: 415px) and (orientation: portrait) {
         .pause-img-class {
           height: 100%;
-          width: 50%;
+          width: 40%;
         }
       }
     `,
