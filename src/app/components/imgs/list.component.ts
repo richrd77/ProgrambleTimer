@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-list-img',
@@ -29,15 +29,23 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     `,
   ],
 })
-export class ListImgComponent {
+export class ListImgComponent implements OnInit {
   @Input() imgColor: string;
+  @Input() disabled: boolean;
   @Output() clickEventListener: EventEmitter<any>;
 
   constructor() {
     this.clickEventListener = new EventEmitter<any>();
   }
+  ngOnInit(): void {
+    if (this.disabled) {
+      this.imgColor = 'grey';
+    }
+  }
 
   clickEvent(e: any): void {
-    this.clickEventListener.emit(e);
+    if (!this.disabled) {
+      this.clickEventListener.emit(e);
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-play-img',
@@ -29,15 +29,23 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     `,
   ],
 })
-export class PlayImgComponent {
+export class PlayImgComponent implements OnInit {
   @Input() imgColor: string;
+  @Input() disabled: boolean;
   @Output() clickEventListener: EventEmitter<any>;
 
   constructor() {
     this.clickEventListener = new EventEmitter<any>();
   }
+  ngOnInit(): void {
+    if (this.disabled) {
+      this.imgColor = 'grey';
+    }
+  }
 
   clickEvent(e: any): void {
-    this.clickEventListener.emit(e);
+    if (!this.disabled) {
+      this.clickEventListener.emit(e);
+    }
   }
 }
