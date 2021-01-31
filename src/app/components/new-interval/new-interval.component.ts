@@ -17,7 +17,7 @@ export class NewIntervalComponent implements OnInit {
   clicked = false;
 
   @Input() existingColors: Array<Color>;
-
+  @Input() allInterval: Array<Timer>;
   @Output() newlyCreatedItem: EventEmitter<Timer>;
 
   constructor(private ext: Extensions) {
@@ -75,21 +75,23 @@ export class NewIntervalComponent implements OnInit {
   AddNewInterval(): void {
     this.clicked = true;
     if (Number(this.NewInterval.value) > 0 && this.NewIntervalKey.value) {
-      this.newlyCreatedItem.emit(
-        new Timer(
-          this.NewIntervalKey.value,
-          Number(this.NewInterval.value),
-          this.Color.value
-        )
+      const newTimer = new Timer(
+        this.NewIntervalKey.value,
+        Number(this.NewInterval.value),
+        this.Color.value
       );
-      this.ClearValidationError();
-      // if (this.allInterval.has(this.NewIntervalKey.value)) {
-      //     this.ShowValidationError('Try different Name for this interval');
-      // } else {
-      //     this.ClearValidationError();
-      //     this.allInterval.set(this.NewIntervalKey.value, new Timer(this.NewIntervalKey.value, Number(this.NewInterval.value)));
-      //     this.modalService.dismissAll('');
-      // }
+      if (
+        !this.ext.ContiansItem(
+          this.allInterval,
+          newTimer,
+          (a, b) => a.Name === b.Name
+        )
+      ) {
+        this.newlyCreatedItem.emit(newTimer);
+        this.ClearValidationError();
+      } else {
+        this.ShowValidationError('Try different Name');
+      }
     } else {
       this.ShowValidationError('One or more details are missing');
     }

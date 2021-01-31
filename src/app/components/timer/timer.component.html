@@ -49,7 +49,7 @@
           <div [ngSwitch]="menuItemName">
             <div *ngSwitchCase="'New-Item'">
               <app-new-interval
-                (newlyCreatedItem)="NewTimerEvent($event)"
+                (newlyCreatedItem)="NewTimerEvent($event)" [allInterval]="allInterval"
                 [existingColors]="allColors"
               ></app-new-interval>
             </div>
