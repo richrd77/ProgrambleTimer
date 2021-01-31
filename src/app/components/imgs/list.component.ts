@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-list-img',
@@ -29,7 +37,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
     `,
   ],
 })
-export class ListImgComponent implements OnInit {
+export class ListImgComponent implements OnInit, OnChanges {
   @Input() imgColor: string;
   @Input() disabled: boolean;
   @Output() clickEventListener: EventEmitter<any>;
@@ -40,6 +48,16 @@ export class ListImgComponent implements OnInit {
   ngOnInit(): void {
     if (this.disabled) {
       this.imgColor = 'grey';
+    } else {
+      this.imgColor = 'black';
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.disabled) {
+      this.imgColor = 'grey';
+    } else {
+      this.imgColor = 'black';
     }
   }
 

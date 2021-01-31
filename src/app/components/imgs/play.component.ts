@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-play-img',
@@ -29,7 +37,7 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
     `,
   ],
 })
-export class PlayImgComponent implements OnInit {
+export class PlayImgComponent implements OnInit, OnChanges {
   @Input() imgColor: string;
   @Input() disabled: boolean;
   @Output() clickEventListener: EventEmitter<any>;
@@ -37,9 +45,18 @@ export class PlayImgComponent implements OnInit {
   constructor() {
     this.clickEventListener = new EventEmitter<any>();
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.disabled) {
+      this.imgColor = 'grey';
+    } else {
+      this.imgColor = 'black';
+    }
+  }
   ngOnInit(): void {
     if (this.disabled) {
       this.imgColor = 'grey';
+    } else {
+      this.imgColor = 'black';
     }
   }
 

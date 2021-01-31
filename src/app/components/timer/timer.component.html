@@ -10,16 +10,32 @@
       </div>
       <div class="ribbon">
         <div class="ribbon-container">
-          <app-plus-img [imgColor]="'black'" (clickEventListener)="RibbonItemClickEvent('New-Item')"></app-plus-img>
-          <app-play-img [disabled]="true" *ngIf="!isRunning" [imgColor]="'black'" (clickEventListener)="RunTimer()"></app-play-img>
-          <app-pause-img *ngIf="isRunning" [imgColor]="'black'" (clickEventListener)="RunTimer()"></app-pause-img>
-          <app-refresh-img [imgColor]="'black'"></app-refresh-img>
-          <app-list-img [imgColor]="'black'" (clickEventListener)="RibbonItemClickEvent('list')"></app-list-img>
+          <app-plus-img
+            [disabled]="isRunning"
+            [imgColor]="'black'"
+            (clickEventListener)="RibbonItemClickEvent('New-Item')"
+          ></app-plus-img>
+          <app-play-img
+            [disabled]="isarrayEmpty"
+            *ngIf="!isRunning"
+            [imgColor]="'black'"
+            (clickEventListener)="RunTimer()"
+          ></app-play-img>
+          <app-pause-img
+            *ngIf="isRunning"
+            [imgColor]="'black'"
+            (clickEventListener)="RunTimer()"
+          ></app-pause-img>
+          <app-refresh-img [imgColor]="'black'" [disabled]="isRunning" (click)="ClearThings()"></app-refresh-img>
+          <app-list-img
+            [imgColor]="'black'"
+            (clickEventListener)="RibbonItemClickEvent('list')"
+          ></app-list-img>
         </div>
       </div>
       <ng-template #mymodal let-modal>
         <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">{{modalHeader}}</h4>
+          <h4 class="modal-title" id="modal-basic-title">{{ modalHeader }}</h4>
           <a
             class="close"
             style="cursor: pointer"
@@ -32,10 +48,15 @@
         <div class="modal-body">
           <div [ngSwitch]="menuItemName">
             <div *ngSwitchCase="'New-Item'">
-              <app-new-interval (newlyCreatedItem)="NewTimerEvent($event)" [existingColors]="allColors"></app-new-interval>
+              <app-new-interval
+                (newlyCreatedItem)="NewTimerEvent($event)"
+                [existingColors]="allColors"
+              ></app-new-interval>
             </div>
             <div *ngSwitchCase="'list'">
-              <app-interval-list [allInterval]="allInterval"></app-interval-list>
+              <app-interval-list
+                [allInterval]="allInterval"
+              ></app-interval-list>
             </div>
           </div>
         </div>

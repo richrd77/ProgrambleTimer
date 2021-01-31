@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-refresh-img',
@@ -31,7 +39,7 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
     `,
   ],
 })
-export class RefreshImgComponent implements OnInit {
+export class RefreshImgComponent implements OnInit, OnChanges {
   @Input() imgColor: string;
   @Input() disabled: boolean;
   @Output() clickEventListener: EventEmitter<any>;
@@ -42,6 +50,14 @@ export class RefreshImgComponent implements OnInit {
   ngOnInit(): void {
     if (this.disabled) {
       this.imgColor = 'grey';
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.disabled) {
+      this.imgColor = 'grey';
+    } else {
+      this.imgColor = 'black';
     }
   }
 

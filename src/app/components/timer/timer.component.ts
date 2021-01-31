@@ -1,4 +1,10 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Timer } from '../../model/timer';
@@ -30,6 +36,7 @@ export class TimerComponent implements OnInit {
   mainTimerSecondsRaw = 0;
   menuItemName: string;
   modalHeader: string;
+  isarrayEmpty = true;
 
   @ViewChild('mymodal')
   private newItemModal: TemplateRef<any>;
@@ -155,6 +162,7 @@ export class TimerComponent implements OnInit {
     ) {
       this.allInterval.push(newItem);
       this.modalService.dismissAll();
+      this.isarrayEmpty = !(this.allInterval.length > 0);
     }
   }
 
@@ -197,5 +205,17 @@ export class TimerComponent implements OnInit {
       this.modalHeader = 'List of Interval';
     }
     this.open(this.newItemModal);
+  }
+
+  ClearThings(): void {
+    this.mainTimerSeconds = 0;
+    this.mainTimerMinutes = 0;
+    this.mainTimerHours = 0;
+    this.intervalprogress = 0;
+    this.currentItem = null;
+    this.currentIndex = 0;
+    this.mainTimerSecondsRaw = 0;
+    this.allInterval = [];
+    this.isarrayEmpty = true;
   }
 }
