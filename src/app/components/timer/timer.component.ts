@@ -29,6 +29,7 @@ export class TimerComponent implements OnInit {
   currentIndex: number;
   mainTimerSecondsRaw = 0;
   menuItemName: string;
+  modalHeader: string;
 
   @ViewChild('mymodal')
   private newItemModal: TemplateRef<any>;
@@ -153,12 +154,17 @@ export class TimerComponent implements OnInit {
       )
     ) {
       this.allInterval.push(newItem);
+      this.modalService.dismissAll();
     }
   }
 
   open(content: any) {
     this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        backdrop: 'static',
+        keyboard: false,
+      })
       .result.then(
         (result) => {
           //            this.NewInterval.setValue(0);
@@ -185,6 +191,11 @@ export class TimerComponent implements OnInit {
 
   RibbonItemClickEvent(name: string) {
     this.menuItemName = name;
+    if (name === 'New-Item') {
+      this.modalHeader = 'New Interval';
+    } else {
+      this.modalHeader = 'List of Interval';
+    }
     this.open(this.newItemModal);
   }
 }
