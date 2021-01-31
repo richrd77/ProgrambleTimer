@@ -130,6 +130,7 @@ export class TimerComponent implements OnInit {
       this.currentItem = this.allInterval[this.currentIndex];
       // this.currentItem.Color = this.getRandomColor();
       this.mainTimerSecondsRaw = 0;
+      this.ext.beep();
     }
     // chnge hrdcoded 60 to intervl seconds
     this.intervalprogress =
