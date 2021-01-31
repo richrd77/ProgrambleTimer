@@ -152,7 +152,6 @@ export class TimerComponent implements OnInit {
       )
     ) {
       this.allInterval.push(newItem);
-      console.log(this.allInterval.length);
     }
   }
 

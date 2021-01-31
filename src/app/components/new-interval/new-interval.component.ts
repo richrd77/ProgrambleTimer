@@ -29,6 +29,10 @@ export class NewIntervalComponent implements OnInit {
     this.newIntervalFormGroup = new FormGroup({
       newIntervalKey: new FormControl('', Validators.required),
       newInterval: new FormControl(0, Validators.required),
+      color: new FormControl(
+        this.getRandomColor().GetHex(this.ext),
+        Validators.required
+      ),
     });
   }
 
@@ -38,6 +42,10 @@ export class NewIntervalComponent implements OnInit {
 
   get NewInterval() {
     return this.newIntervalFormGroup.get('newInterval');
+  }
+
+  get Color() {
+    return this.newIntervalFormGroup.get('color');
   }
 
   ShowValidationError(msg: string) {
@@ -71,7 +79,7 @@ export class NewIntervalComponent implements OnInit {
         new Timer(
           this.NewIntervalKey.value,
           Number(this.NewInterval.value),
-          this.getRandomColor().GetColor()
+          this.Color.value
         )
       );
       this.ClearValidationError();
@@ -107,14 +115,14 @@ export class NewIntervalComponent implements OnInit {
     return newColor;
   }
 
-//   ContiansItem(obj: Color): boolean {
-//     if (this.existingColors.length > 0) {
-//       return (
-//         this.existingColors.filter(
-//           (k: Color) => k.r === obj.r && k.g === obj.g && k.b === obj.b
-//         ).length > 0
-//       );
-//     }
-//     return false;
-//   }
+  //   ContiansItem(obj: Color): boolean {
+  //     if (this.existingColors.length > 0) {
+  //       return (
+  //         this.existingColors.filter(
+  //           (k: Color) => k.r === obj.r && k.g === obj.g && k.b === obj.b
+  //         ).length > 0
+  //       );
+  //     }
+  //     return false;
+  //   }
 }

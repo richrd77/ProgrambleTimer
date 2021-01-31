@@ -4,8 +4,10 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\components",
+    "\\src\\app\\components\\interval-list",
+    "\\src\\app\\components\\new-interval",
     "\\src\\app\\components\\timer"
   ],
-  "SelectedNode": "\\src\\app\\components\\timer\\timer.component.ts",
+  "SelectedNode": "\\e2e",
   "PreviewInSolutionExplorer": false
 }

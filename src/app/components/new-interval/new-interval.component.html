@@ -1,47 +1,55 @@
 <div class="container">
-    <div *ngIf="!validationStatus" class="alert-danger">
-      <span class="text-danger">{{ validationMessage }}</span>
-    </div>
-    <br />
-    <form
-      [formGroup]="newIntervalFormGroup"
-      (ngSubmit)="AddNewInterval()"
-      class="form"
-      enctype="multipart/form-data"
-    >
-      <div class="form-group">
-        <div class="input-group controls">
-          <input
-            formControlName="newIntervalKey"
-            type="text"
-            class="form-field"
-            placeholder="Interval Name"
-          />
-        </div>
+  <div *ngIf="!validationStatus" class="alert-danger">
+    <span class="text-danger">{{ validationMessage }}</span>
+  </div>
+  <br />
+  <form
+    [formGroup]="newIntervalFormGroup"
+    (ngSubmit)="AddNewInterval()"
+    class="form"
+    enctype="multipart/form-data"
+  >
+    <div class="form-group">
+      <div class="input-group controls">
+        <input
+          formControlName="newIntervalKey"
+          type="text"
+          class="form-field"
+          placeholder="Interval Name"
+        />
       </div>
-      <div class="form-group">
-        <div class="input-group controls">
-          <div class="interval-input">
-            <div
-              class="interval timer-btn interval-increase up-down-btn"
-              (click)="IncreaseInterval()"
-            >
-              ^
-            </div>
-            <div class="new-interval-holder">
-              {{ NewInterval.value }} Sec
-            </div>
-            <div
-              class="interval timer-btn interval-decrease up-down-btn"
-              (click)="DecreaseInterval()"
-            >
-              ^
-            </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group controls">
+        <div class="interval-input">
+          <div
+            class="interval timer-btn interval-increase up-down-btn"
+            (click)="IncreaseInterval()"
+          >
+            ^
+          </div>
+          <div class="new-interval-holder">{{ NewInterval.value }} Sec</div>
+          <div
+            class="interval timer-btn interval-decrease up-down-btn"
+            (click)="DecreaseInterval()"
+          >
+            ^
           </div>
         </div>
       </div>
-      <button type="submit" style="float: right" class="timer-btn" [disabled]="clicked">
-        Add
-      </button>
-    </form>
-  </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group controls">
+        pick a fun color to visibly see the progress&nbsp;&nbsp;<input type="color" formControlName="color" />
+      </div>
+    </div>
+    <button
+      type="submit"
+      style="float: right"
+      class="timer-btn"
+      [disabled]="clicked"
+    >
+      Add
+    </button>
+  </form>
+</div>
