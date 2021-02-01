@@ -34,18 +34,18 @@
         </div>
       </div>
       <ng-template #mymodal let-modal>
-        <div class="modal-header">
+        <div class="modal-header modal-theme-custom">
           <h4 class="modal-title" id="modal-basic-title">{{ modalHeader }}</h4>
           <a
             class="close"
-            style="cursor: pointer"
+            style="cursor: pointer;color: var(--controls-color)"
             aria-label="Close"
             (click)="modal.dismiss('Cross click')"
           >
-            <span aria-hidden="true">×</span>
+            <span style="color: var(--controls-color)" aria-hidden="true">×</span>
           </a>
         </div>
-        <div class="modal-body">
+        <div class="modal-body modal-theme-custom">
           <div [ngSwitch]="menuItemName">
             <div *ngSwitchCase="'New-Item'">
               <app-new-interval

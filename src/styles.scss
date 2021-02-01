@@ -1,14 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --newitemsize: 7rem;
+  --maintimersize: 40vh;
+  --timerlistsize: 40vh;
+  --ribbonsize: 20vh;
+  --maintimersize-mobile: 80vh;
+  --timerlistsize-mobile: 40vh;
+  --ribbonsize-mobile: 10vh;
+  --controls-color: white;
+  // --bgColor: #ffffff80;
+  --bgColor: black;
+}
 
 @font-face {
-    font-family: "Ubuntu", sans-serif;
-    src: url('./assets/font/ubuntu/Ubuntu-Regular.ttf')
-  }
-  
-  * {
-    font-family: "Ubuntu", sans-serif;
-  }
-  
-  .clickable {
-    cursor: pointer;
-  }
+  font-family: "Ubuntu", sans-serif;
+  src: url("./assets/font/ubuntu/Ubuntu-Regular.ttf");
+}
+
+* {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.disabled {
+  color: grey;
+}

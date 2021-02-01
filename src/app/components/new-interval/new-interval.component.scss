@@ -2,7 +2,30 @@
   width: 100%;
   padding: 0.5rem;
   border-radius: 0.25rem;
+  border-color: var(--controls-color);
+  color: var(--controls-color);
 }
+
+input[type=Text] {
+  background-color: var(--bgColor);
+}
+
+.form-field:focus {
+  border-color: var(--controls-color);
+}
+
+::-webkit-input-placeholder { /* Edge */
+  color: var(--controls-color);
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--controls-color);
+}
+
+::placeholder {
+  color: var(--controls-color);
+}
+
 .interval-input {
   width: 100%;
   user-select: none;
@@ -26,18 +49,24 @@
   width: 50%;
   text-align: right;
   margin-right: 0.5rem;
+  color: var(--controls-color);
 }
 
 .timer-btn {
-  border: solid 2px rgba(0, 0, 0, 0.8);
+  border: solid 2px var(--controls-color);
   background-color: var(--bgColor);
   color: rgba(0, 0, 0, 0.8);
   border-radius: 5px;
   padding: 0.5rem;
   cursor: pointer;
+  color: var(--controls-color);
 }
 
 .timer-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
+  background-color: var(--controls-color);
+  color: var(--bgColor);
+}
+
+.color-picker-lbl {
+  color: var(--controls-color);
 }
