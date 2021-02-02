@@ -15,6 +15,8 @@ import { PauseImgComponent } from './components/imgs/pause.component';
 import { PlayImgComponent } from './components/imgs/play.component';
 import { PlusImgComponent } from './components/imgs/plus.component';
 import { RefreshImgComponent } from './components/imgs/refresh.component';
+import { MoonImgComponent } from './components/imgs/moon.component';
+import { SunImgComponent } from './components/imgs/sun.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { RefreshImgComponent } from './components/imgs/refresh.component';
     PauseImgComponent,
     PlayImgComponent,
     PlusImgComponent,
-    RefreshImgComponent
+    RefreshImgComponent,
+    MoonImgComponent,
+    SunImgComponent
   ],
   imports: [
     BrowserModule,

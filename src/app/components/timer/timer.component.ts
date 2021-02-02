@@ -217,5 +217,7 @@ export class TimerComponent implements OnInit {
     this.mainTimerSecondsRaw = 0;
     this.allInterval = [];
     this.isarrayEmpty = true;
+    clearInterval(this.timerIntervalId);
+    this.isRunning = false;
   }
 }
