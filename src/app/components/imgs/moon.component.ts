@@ -25,13 +25,13 @@ import {
     `
       .moon-img-class {
         height: 100%;
-        width: 20%;
+        width: 100%;
       }
 
       @media only screen and (max-width: 415px) and (orientation: portrait) {
         .moon-img-class {
           height: 100%;
-          width: 40%;
+          width: 100%;
         }
       }
     `,
@@ -62,7 +62,9 @@ export class MoonImgComponent implements OnInit, OnChanges {
   }
 
   clickEvent(e: any): void {
+    console.log('now1');
     if (!this.disabled) {
+      console.log('now2');
       this.clickEventListener.emit(e);
     }
   }

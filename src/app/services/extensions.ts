@@ -46,4 +46,8 @@ export class Extensions {
     );
     snd.play();
   }
+
+  ToBoolean(value: string): boolean {
+    return value === 'true';
+  }
 }

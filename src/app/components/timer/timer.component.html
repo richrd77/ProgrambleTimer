@@ -1,6 +1,7 @@
 <div style="position: relative">
   <div class="glass-card">
     <div class="wrapper">
+      <app-moon-img class="dark-mode-toggler" (clickEventListener)="ChangeTheme()"></app-moon-img>
       <div
         class="main-timer"
         (window:resize)="OnResize($event)"
@@ -26,7 +27,11 @@
             [imgColor]="'black'"
             (clickEventListener)="RunTimer()"
           ></app-pause-img>
-          <app-refresh-img [imgColor]="'black'" [disabled]="isRunning" (click)="ClearThings()"></app-refresh-img>
+          <app-refresh-img
+            [imgColor]="'black'"
+            [disabled]="isRunning"
+            (click)="ClearThings()"
+          ></app-refresh-img>
           <app-list-img
             [imgColor]="'black'"
             (clickEventListener)="RibbonItemClickEvent('list')"
@@ -38,18 +43,21 @@
           <h4 class="modal-title" id="modal-basic-title">{{ modalHeader }}</h4>
           <a
             class="close"
-            style="cursor: pointer;color: var(--controls-color)"
+            style="cursor: pointer; color: var(--controls-color)"
             aria-label="Close"
             (click)="modal.dismiss('Cross click')"
           >
-            <span style="color: var(--controls-color)" aria-hidden="true">×</span>
+            <span style="color: var(--controls-color)" aria-hidden="true"
+              >×</span
+            >
           </a>
         </div>
         <div class="modal-body modal-theme-custom">
           <div [ngSwitch]="menuItemName">
             <div *ngSwitchCase="'New-Item'">
               <app-new-interval
-                (newlyCreatedItem)="NewTimerEvent($event)" [allInterval]="allInterval"
+                (newlyCreatedItem)="NewTimerEvent($event)"
+                [allInterval]="allInterval"
                 [existingColors]="allColors"
               ></app-new-interval>
             </div>

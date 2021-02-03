@@ -12,6 +12,11 @@
   //--bgColor: #000000cc; - dark mode
 }
 
+.dark-mode {
+  --controls-color: white;
+  --bgColor: #000000cc;
+}
+
 @font-face {
   font-family: "Ubuntu", sans-serif;
   src: url("./assets/font/ubuntu/Ubuntu-Regular.ttf");

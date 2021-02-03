@@ -4,6 +4,7 @@ import {
   OnInit,
   TemplateRef,
   ViewChild,
+  Renderer2,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -41,7 +42,11 @@ export class TimerComponent implements OnInit {
   @ViewChild('mymodal')
   private newItemModal: TemplateRef<any>;
 
-  constructor(private modalService: NgbModal, private ext: Extensions) {
+  constructor(
+    private modalService: NgbModal,
+    private ext: Extensions,
+    private renderer: Renderer2
+  ) {
     this.allInterval = [];
     this.intervalprogress = 0;
     this.currentIndex = 0;
@@ -53,6 +58,10 @@ export class TimerComponent implements OnInit {
       newIntervalKey: new FormControl('', Validators.required),
       newInterval: new FormControl(0, Validators.required),
     });
+
+    this.ToggleTheme(this.ext.ToBoolean(
+      localStorage.getItem('isDark')
+    ));
   }
 
   OnResize(e): void {
@@ -219,5 +228,21 @@ export class TimerComponent implements OnInit {
     this.isarrayEmpty = true;
     clearInterval(this.timerIntervalId);
     this.isRunning = false;
+  }
+
+  ChangeTheme(): void {
+    this.ToggleTheme(!this.ext.ToBoolean(
+      localStorage.getItem('isDark')
+    ));
+  }
+
+  ToggleTheme(isDarkModeEnabled: boolean): void {
+    if (isDarkModeEnabled) {
+      this.renderer.addClass(document.body, 'dark-mode');
+      localStorage.setItem('isDark', 'true');
+    } else {
+      this.renderer.removeClass(document.body, 'dark-mode');
+      localStorage.setItem('isDark', 'false');
+    }
   }
 }

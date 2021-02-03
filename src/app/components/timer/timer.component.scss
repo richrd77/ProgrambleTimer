@@ -38,6 +38,16 @@
   color: var(--controls-color);
   background-color: transparent;
   position: relative;
+  pointer-events: none;
+}
+
+.dark-mode-toggler {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
 }
 
 .ribbon {
