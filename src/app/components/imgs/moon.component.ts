@@ -37,7 +37,7 @@ import {
     `,
   ],
 })
-export class MoonImgComponent implements OnInit, OnChanges {
+export class MoonImgComponent implements OnInit {
   @Input() imgColor: string;
   @Input() disabled: boolean;
   @Output() clickEventListener: EventEmitter<any>;
@@ -53,18 +53,8 @@ export class MoonImgComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.disabled) {
-      this.imgColor = 'grey';
-    } else {
-      this.imgColor = 'black';
-    }
-  }
-
   clickEvent(e: any): void {
-    console.log('now1');
     if (!this.disabled) {
-      console.log('now2');
       this.clickEventListener.emit(e);
     }
   }

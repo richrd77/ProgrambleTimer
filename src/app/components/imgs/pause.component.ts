@@ -19,7 +19,8 @@ import {
     <path
     fill="var(--controls-color)"
       d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"
-    />
+      appDisabled [flag] ="disabled"
+      [ngClass]="{'disabled': disabled}"/>
   </svg>`,
   styles: [
     `
@@ -54,11 +55,11 @@ export class PauseImgComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.disabled) {
-      this.imgColor = 'grey';
-    } else {
-      this.imgColor = 'black';
-    }
+    // if (this.disabled) {
+    //   this.imgColor = 'grey';
+    // } else {
+    //   this.imgColor = 'black';
+    // }
   }
 
   clickEvent(e: any): void {

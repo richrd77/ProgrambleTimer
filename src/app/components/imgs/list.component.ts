@@ -54,11 +54,11 @@ export class ListImgComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.disabled) {
-      this.imgColor = 'grey';
-    } else {
-      this.imgColor = 'black';
-    }
+    // if (this.disabled) {
+    //   this.imgColor = 'grey';
+    // } else {
+    //   this.imgColor = 'black';
+    // }
   }
 
   clickEvent(e: any): void {

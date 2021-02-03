@@ -65,8 +65,6 @@ export class TimerComponent implements OnInit {
   }
 
   OnResize(e): void {
-    console.log(e.target.innerWidth);
-    console.log(e.target.innerHeight);
   }
 
   StartTimer(): void {
