@@ -100,6 +100,7 @@ export class TimerComponent implements OnInit {
   }
 
   RunTimer(): void {
+    navigator.vibrate(500);
     if (this.allInterval.length > 0) {
       if (this.isRunning) {
         this.StopTimer();
