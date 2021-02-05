@@ -33,6 +33,10 @@ export class TimerComponent implements OnInit {
   isPlainTime = true;
   canaddNew = true;
 
+  showMessage: boolean;
+  message: string;
+  isError: boolean;
+
   @ViewChild('mymodal')
   private newItemModal: TemplateRef<any>;
 
@@ -75,7 +79,6 @@ export class TimerComponent implements OnInit {
   }
 
   RunTimer(): void {
-    navigator.vibrate(500);
     if (this.allInterval.length > 0) {
       if (this.isRunning) {
         this.StopTimer();
@@ -156,12 +159,11 @@ export class TimerComponent implements OnInit {
   }
 
   open(content: any) {
-    this.modalService
-      .open(content, {
-        ariaLabelledBy: 'modal-basic-title',
-        backdrop: 'static',
-        keyboard: false,
-      });
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      backdrop: 'static',
+      keyboard: false,
+    });
   }
 
   RibbonItemClickEvent(name: string) {
@@ -215,5 +217,17 @@ export class TimerComponent implements OnInit {
       this.mainTimerSecondsRaw += 1;
       this.CalculateTimer();
     }, 1000);
+  }
+
+  ShowMessage(msg: string): void {
+    this.message = msg;
+    this.showMessage = true;
+    this.isError = false;
+  }
+
+  ShowErrorMessage(msg: string): void {
+    this.message = msg;
+    this.showMessage = true;
+    this.isError = true;
   }
 }

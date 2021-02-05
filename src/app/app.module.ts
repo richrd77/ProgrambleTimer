@@ -18,6 +18,7 @@ import { RefreshImgComponent } from './components/imgs/refresh.component';
 import { MoonImgComponent } from './components/imgs/moon.component';
 import { SunImgComponent } from './components/imgs/sun.component';
 import { DisabledDirective } from './directives/disabled.directive';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DisabledDirective } from './directives/disabled.directive';
     RefreshImgComponent,
     MoonImgComponent,
     SunImgComponent,
-    DisabledDirective
+    DisabledDirective,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
