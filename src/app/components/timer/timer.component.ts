@@ -38,6 +38,8 @@ export class TimerComponent implements OnInit {
   menuItemName: string;
   modalHeader: string;
   isarrayEmpty = true;
+  isPlainTime = true;
+  canaddNew = true;
 
   @ViewChild('mymodal')
   private newItemModal: TemplateRef<any>;
@@ -59,17 +61,15 @@ export class TimerComponent implements OnInit {
       newInterval: new FormControl(0, Validators.required),
     });
 
-    this.ToggleTheme(this.ext.ToBoolean(
-      localStorage.getItem('isDark')
-    ));
+    this.ToggleTheme(this.ext.ToBoolean(localStorage.getItem('isDark')));
   }
 
-  OnResize(e): void {
-  }
+  OnResize(e): void {}
 
   StartTimer(): void {
     this.currentItem = this.allInterval[this.currentIndex];
     this.isRunning = true;
+    this.canaddNew = false;
     this.ChngeIcon();
     if (this.timerIntervalId) {
       clearInterval(this.timerIntervalId);
@@ -85,6 +85,7 @@ export class TimerComponent implements OnInit {
   StopTimer(): void {
     if (this.timerIntervalId) {
       clearInterval(this.timerIntervalId);
+      this.canaddNew = !this.isPlainTime;
       this.isRunning = false;
       this.ChngeIcon();
     }
@@ -104,6 +105,12 @@ export class TimerComponent implements OnInit {
         this.StopTimer();
       } else {
         this.StartTimer();
+      }
+    } else {
+      if (this.isRunning) {
+        this.StopTimer();
+      } else {
+        this.StartPlainTimer();
       }
     }
   }
@@ -226,12 +233,12 @@ export class TimerComponent implements OnInit {
     this.isarrayEmpty = true;
     clearInterval(this.timerIntervalId);
     this.isRunning = false;
+    this.isPlainTime = false;
+    this.canaddNew = true;
   }
 
   ChangeTheme(): void {
-    this.ToggleTheme(!this.ext.ToBoolean(
-      localStorage.getItem('isDark')
-    ));
+    this.ToggleTheme(!this.ext.ToBoolean(localStorage.getItem('isDark')));
   }
 
   ToggleTheme(isDarkModeEnabled: boolean): void {
@@ -242,5 +249,19 @@ export class TimerComponent implements OnInit {
       this.renderer.removeClass(document.body, 'dark-mode');
       localStorage.setItem('isDark', 'false');
     }
+  }
+
+  StartPlainTimer(): void {
+    if (this.timerIntervalId) {
+      clearInterval(this.timerIntervalId);
+    }
+    this.isRunning = true;
+    this.isPlainTime = true;
+    this.canaddNew = false;
+    this.timerIntervalId = setInterval(() => {
+      this.mainTimerSeconds += 1;
+      this.mainTimerSecondsRaw += 1;
+      this.CalculateTimer();
+    }, 1000);
   }
 }

@@ -12,12 +12,11 @@
       <div class="ribbon">
         <div class="ribbon-container">
           <app-plus-img
-            [disabled]="isRunning"
+            [disabled]="!canaddNew"
             [imgColor]="'black'"
             (clickEventListener)="RibbonItemClickEvent('New-Item')"
           ></app-plus-img>
           <app-play-img
-            [disabled]="isarrayEmpty"
             *ngIf="!isRunning"
             [imgColor]="'black'"
             (clickEventListener)="RunTimer()"
