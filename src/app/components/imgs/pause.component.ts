@@ -4,8 +4,6 @@ import {
   Input,
   Output,
   OnInit,
-  OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 
 @Component({
@@ -38,7 +36,7 @@ import {
     `,
   ],
 })
-export class PauseImgComponent implements OnInit, OnChanges {
+export class PauseImgComponent implements OnInit {
   @Input() imgColor: string;
   @Input() disabled: boolean;
   @Output() clickEventListener: EventEmitter<any>;
@@ -52,14 +50,6 @@ export class PauseImgComponent implements OnInit, OnChanges {
     } else {
       this.imgColor = 'black';
     }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // if (this.disabled) {
-    //   this.imgColor = 'grey';
-    // } else {
-    //   this.imgColor = 'black';
-    // }
   }
 
   clickEvent(e: any): void {

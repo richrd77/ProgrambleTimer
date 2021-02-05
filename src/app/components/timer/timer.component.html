@@ -4,8 +4,6 @@
       <app-moon-img class="dark-mode-toggler" (clickEventListener)="ChangeTheme()"></app-moon-img>
       <div
         class="main-timer"
-        (window:resize)="OnResize($event)"
-        [style.font-size]="mainfontsize"
       >
         {{ DisplayTime() }}
       </div>

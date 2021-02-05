@@ -116,15 +116,4 @@ export class NewIntervalComponent implements OnInit {
     }
     return newColor;
   }
-
-  //   ContiansItem(obj: Color): boolean {
-  //     if (this.existingColors.length > 0) {
-  //       return (
-  //         this.existingColors.filter(
-  //           (k: Color) => k.r === obj.r && k.g === obj.g && k.b === obj.b
-  //         ).length > 0
-  //       );
-  //     }
-  //     return false;
-  //   }
 }

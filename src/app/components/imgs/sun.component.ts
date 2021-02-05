@@ -3,9 +3,7 @@ import {
   EventEmitter,
   Input,
   Output,
-  SimpleChanges,
   OnInit,
-  OnChanges,
 } from '@angular/core';
 
 @Component({
@@ -37,7 +35,7 @@ import {
     `,
   ],
 })
-export class SunImgComponent implements OnInit, OnChanges {
+export class SunImgComponent implements OnInit {
   @Input() imgColor: string;
   @Input() disabled: boolean;
   @Output() clickEventListener: EventEmitter<any>;
@@ -46,14 +44,6 @@ export class SunImgComponent implements OnInit, OnChanges {
     this.clickEventListener = new EventEmitter<any>();
   }
   ngOnInit(): void {
-    if (this.disabled) {
-      this.imgColor = 'grey';
-    } else {
-      this.imgColor = 'black';
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
     if (this.disabled) {
       this.imgColor = 'grey';
     } else {

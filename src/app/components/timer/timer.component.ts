@@ -1,13 +1,11 @@
 import {
   Component,
-  DoCheck,
   OnInit,
   TemplateRef,
   ViewChild,
   Renderer2,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Timer } from '../../model/timer';
 import { Color } from '../../model/color';
 import { Extensions } from '../../services/extensions';
@@ -20,24 +18,18 @@ import { Extensions } from '../../services/extensions';
 export class TimerComponent implements OnInit {
   allInterval: Array<Timer>;
   allColors: Array<Color>;
-  closeResult = '';
-  newIntervalFormGroup: FormGroup;
   intervalStep = 5;
-  validationMessage: string;
   mainTimerSeconds = 0;
   mainTimerMinutes = 0;
   mainTimerHours = 0;
   timerIntervalId: any;
   isRunning: boolean;
-  imgNme = 'play';
-  mainfontsize: string;
   intervalprogress: number;
   currentItem: Timer;
   currentIndex: number;
   mainTimerSecondsRaw = 0;
   menuItemName: string;
   modalHeader: string;
-  isarrayEmpty = true;
   isPlainTime = true;
   canaddNew = true;
 
@@ -56,21 +48,13 @@ export class TimerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newIntervalFormGroup = new FormGroup({
-      newIntervalKey: new FormControl('', Validators.required),
-      newInterval: new FormControl(0, Validators.required),
-    });
-
     this.ToggleTheme(this.ext.ToBoolean(localStorage.getItem('isDark')));
   }
-
-  OnResize(e): void {}
 
   StartTimer(): void {
     this.currentItem = this.allInterval[this.currentIndex];
     this.isRunning = true;
     this.canaddNew = false;
-    this.ChngeIcon();
     if (this.timerIntervalId) {
       clearInterval(this.timerIntervalId);
     }
@@ -87,15 +71,6 @@ export class TimerComponent implements OnInit {
       clearInterval(this.timerIntervalId);
       this.canaddNew = !this.isPlainTime;
       this.isRunning = false;
-      this.ChngeIcon();
-    }
-  }
-
-  ChngeIcon(): void {
-    if (this.isRunning) {
-      this.imgNme = 'pause';
-    } else {
-      this.imgNme = 'play';
     }
   }
 
@@ -177,7 +152,6 @@ export class TimerComponent implements OnInit {
     ) {
       this.allInterval.push(newItem);
       this.modalService.dismissAll();
-      this.isarrayEmpty = !(this.allInterval.length > 0);
     }
   }
 
@@ -187,29 +161,7 @@ export class TimerComponent implements OnInit {
         ariaLabelledBy: 'modal-basic-title',
         backdrop: 'static',
         keyboard: false,
-      })
-      .result.then(
-        (result) => {
-          //            this.NewInterval.setValue(0);
-          //            this.NewIntervalKey.setValue('');
-          //            this.ClearValidationError();
-        },
-        (reason) => {
-          //            this.NewInterval.setValue(0);
-          //            this.NewIntervalKey.setValue('');
-          //            this.ClearValidationError();
-        }
-      );
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+      });
   }
 
   RibbonItemClickEvent(name: string) {
@@ -231,7 +183,6 @@ export class TimerComponent implements OnInit {
     this.currentIndex = 0;
     this.mainTimerSecondsRaw = 0;
     this.allInterval = [];
-    this.isarrayEmpty = true;
     clearInterval(this.timerIntervalId);
     this.isRunning = false;
     this.isPlainTime = false;
