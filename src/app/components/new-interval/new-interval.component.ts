@@ -15,6 +15,7 @@ export class NewIntervalComponent implements OnInit {
   validationMessage: string;
   intervalStep = 5;
   clicked = false;
+  isMultiplyRequired: boolean;
 
   @Input() existingColors: Array<Color>;
   @Input() allInterval: Array<Timer>;
@@ -28,7 +29,7 @@ export class NewIntervalComponent implements OnInit {
   ngOnInit(): void {
     this.newIntervalFormGroup = new FormGroup({
       newIntervalKey: new FormControl('', Validators.required),
-      newInterval: new FormControl(0, Validators.required),
+      newInterval: new FormControl('', Validators.required),
       color: new FormControl(
         this.getRandomColor().GetHex(this.ext),
         Validators.required
@@ -77,7 +78,7 @@ export class NewIntervalComponent implements OnInit {
     if (Number(this.NewInterval.value) > 0 && this.NewIntervalKey.value) {
       const newTimer = new Timer(
         this.NewIntervalKey.value,
-        Number(this.NewInterval.value),
+        Number(this.isMultiplyRequired ? this.NewInterval.value * 60 : this.NewInterval.value),
         this.Color.value
       );
       if (
@@ -115,5 +116,13 @@ export class NewIntervalComponent implements OnInit {
       }
     }
     return newColor;
+  }
+
+  IntervalTypeChange(e: any): void {
+    if (e.target.options[e.target.options.selectedIndex].value === 'm') {
+      this.isMultiplyRequired = true;
+    } else {
+      this.isMultiplyRequired = false;
+    }
   }
 }

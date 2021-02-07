@@ -34,3 +34,13 @@
 .disabled {
   color: grey;
 }
+
+input[type=Number]::-webkit-outer-spin-button,
+input[type=Number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=Number] {
+  -moz-appearance: none;
+}

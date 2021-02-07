@@ -8,39 +8,40 @@
     (ngSubmit)="AddNewInterval()"
     class="form"
     enctype="multipart/form-data"
+    style="text-transform: capitalize"
   >
     <div class="form-group">
-      <div class="input-group controls">
+      <div class="input-group">
         <input
           formControlName="newIntervalKey"
           type="text"
           class="form-field"
-          placeholder="Interval Name"
+          placeholder="Cycle Name"
         />
       </div>
     </div>
     <div class="form-group">
       <div class="input-group controls">
-        <div class="interval-input">
-          <div
-            class="interval timer-btn interval-increase up-down-btn"
-            (click)="IncreaseInterval()"
-          >
-            ^
-          </div>
-          <div class="new-interval-holder">{{ NewInterval.value }} Sec</div>
-          <div
-            class="interval timer-btn interval-decrease up-down-btn"
-            (click)="DecreaseInterval()"
-          >
-            ^
-          </div>
+        <div class="interval-place-holder">how long this cycle should be?</div>
+        <div class="new-interval-container">
+          <input
+            type="number"
+            class="new-interval-holder"
+            formControlName="newInterval"
+            placeholder="0"
+          />
+          <select name="intervl-type" id="interval-type" class="interval-type" (change)="IntervalTypeChange($event)">
+            <option value="s">Sec</option>
+            <option value="m">Min</option>
+          </select>
         </div>
       </div>
     </div>
     <div class="form-group">
-      <div class="input-group controls">
-        <div class="color-picker-lbl">pick a fun color to visibly see the progress</div><br />
+      <div class="color-picker-lbl interval-place-holder">
+        pick a fun color to visibly see the progress
+      </div>
+      <div style="width: 10%;padding-left: 1rem;">
         <input type="color" formControlName="color" />
       </div>
     </div>

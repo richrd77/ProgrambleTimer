@@ -1,12 +1,22 @@
+.control-borders {
+  border: 0.1rem solid var(--controls-color);
+}
+
 .form-field {
   width: 100%;
   padding: 0.5rem;
   border-radius: 0.25rem;
   border-color: var(--controls-color);
   color: var(--controls-color);
+  @extend .control-borders;
 }
 
-input[type=Text] {
+input[type="Text"],
+input[type="Number"] {
+  background-color: var(--bgColor);
+}
+
+select {
   background-color: var(--bgColor);
 }
 
@@ -14,11 +24,13 @@ input[type=Text] {
   border-color: var(--controls-color);
 }
 
-::-webkit-input-placeholder { /* Edge */
+::-webkit-input-placeholder {
+  /* Edge */
   color: var(--controls-color);
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
   color: var(--controls-color);
 }
 
@@ -42,14 +54,19 @@ input[type=Text] {
   transform: rotate(-180deg);
 }
 
-.new-interval-holder {
+.new-interval-controls {
   display: inline-block;
-  font-family: D7CMB;
   font-size: 2.5rem;
-  width: 50%;
-  text-align: right;
   margin-right: 0.5rem;
   color: var(--controls-color);
+  width: 45%;
+}
+
+.new-interval-holder {
+  @extend .new-interval-controls;
+  @extend .control-borders;
+  font-family: D7CMB;
+  text-align: right;
 }
 
 .timer-btn {
@@ -69,4 +86,18 @@ input[type=Text] {
 
 .color-picker-lbl {
   color: var(--controls-color);
+}
+
+.interval-place-holder {
+  padding: 1rem 0;
+}
+
+.new-interval-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.interval-type{
+  @extend .new-interval-controls;
+  @extend .control-borders;
 }
