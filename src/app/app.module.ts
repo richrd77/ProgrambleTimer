@@ -19,6 +19,7 @@ import { MoonImgComponent } from './components/imgs/moon.component';
 import { SunImgComponent } from './components/imgs/sun.component';
 import { DisabledDirective } from './directives/disabled.directive';
 import { MessageComponent } from './components/message/message.component';
+import { SaveImgComponent } from './components/imgs/save.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MessageComponent } from './components/message/message.component';
     MoonImgComponent,
     SunImgComponent,
     DisabledDirective,
-    MessageComponent
+    MessageComponent,
+    SaveImgComponent
   ],
   imports: [
     BrowserModule,

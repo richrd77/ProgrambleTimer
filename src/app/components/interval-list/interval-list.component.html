@@ -21,4 +21,6 @@
       </tr>
     </tbody>
   </table>
+  <hr>
+  <app-save style="float: right;" [disabled]="!canSave" (clickEventListener)="SaveImgClicked($event)"></app-save>
 </div>
