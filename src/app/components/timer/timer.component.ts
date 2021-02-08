@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Timer } from '../../model/timer';
 import { Color } from '../../model/color';
 import { Extensions } from '../../services/extensions';
+import { SaverService } from '../../services/saver.service';
 
 @Component({
   selector: 'app-timer',
@@ -43,7 +44,8 @@ export class TimerComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private ext: Extensions,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private saverService: SaverService
   ) {
     this.allInterval = [];
     this.intervalprogress = 0;
@@ -52,7 +54,7 @@ export class TimerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ToggleTheme(this.ext.ToBoolean(localStorage.getItem('isDark')));
+    this.ToggleTheme(this.saverService.IsDarkModeOn());
   }
 
   StartTimer(): void {
@@ -192,7 +194,7 @@ export class TimerComponent implements OnInit {
   }
 
   ChangeTheme(): void {
-    this.ToggleTheme(!this.ext.ToBoolean(localStorage.getItem('isDark')));
+    this.ToggleTheme(!this.saverService.IsDarkModeOn());
   }
 
   ToggleTheme(isDarkModeEnabled: boolean): void {

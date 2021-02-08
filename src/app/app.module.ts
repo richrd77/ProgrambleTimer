@@ -20,6 +20,7 @@ import { SunImgComponent } from './components/imgs/sun.component';
 import { DisabledDirective } from './directives/disabled.directive';
 import { MessageComponent } from './components/message/message.component';
 import { SaveImgComponent } from './components/imgs/save.component';
+import { SaverService } from './services/saver.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { SaveImgComponent } from './components/imgs/save.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [Extensions],
+  providers: [Extensions, SaverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
