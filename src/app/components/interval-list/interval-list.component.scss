@@ -3,3 +3,15 @@
   background-color: var(--bgColor);
   border-color: var(--controls-color);
 }
+
+.normal-cell {
+  word-break: break-all;
+}
+
+.numeric-cell {
+  font-family: D7CMB;
+}
+
+.color-cell {
+  word-break: unset;
+}

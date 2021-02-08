@@ -10,10 +10,10 @@
       <tr
         mdbTableCol
         *ngFor="let t of allInterval | keyvalue; let i = index">
-        <td scope="row">{{ t.value.Name }}</td>
-        <td style="font-family: D7CMB;">{{ t.value.Seconds }}</td>
-        <td style="font-family: D7CMB;">{{ t.value.Repetitions }}</td>
-        <td>
+        <td class="normal-cell" scope="row">{{ t.value.Name }}</td>
+        <td class="normal-cell numeric-cell">{{ t.value.Seconds }}</td>
+        <td class="normal-cell numeric-cell">{{ t.value.Repetitions }}</td>
+        <td class="color-cell">
           <span
             style="height: 1rem; width: 1rem; color: transparent"
             [ngStyle]="getEl(t.value)">Color</span>
