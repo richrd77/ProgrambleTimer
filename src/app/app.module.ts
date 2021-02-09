@@ -21,6 +21,8 @@ import { DisabledDirective } from './directives/disabled.directive';
 import { MessageComponent } from './components/message/message.component';
 import { SaveImgComponent } from './components/imgs/save.component';
 import { SaverService } from './services/saver.service';
+import { Constants } from './constants';
+import { RepositoryService } from './services/repo.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,7 @@ import { SaverService } from './services/saver.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [Extensions, SaverService],
+  providers: [Extensions, SaverService, Constants, RepositoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

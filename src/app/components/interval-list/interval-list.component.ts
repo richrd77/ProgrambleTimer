@@ -6,6 +6,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Timer } from '../../model/timer';
+import { Routine, RoutineCycle } from '../../model/routine';
+import { SaverService } from '../../services/saver.service';
 
 @Component({
   selector: 'app-interval-list',
@@ -15,6 +17,9 @@ import { Timer } from '../../model/timer';
 export class IntervalListComponent implements OnInit, OnChanges {
   @Input() allInterval: Timer[];
   canSave: boolean;
+
+  constructor(private saveService: SaverService) {}
+
   ngOnInit(): void {
     this.canSave = this.allInterval.length > 0;
   }
@@ -28,7 +33,6 @@ export class IntervalListComponent implements OnInit, OnChanges {
   }
 
   SaveImgClicked(e: any): void {
-    console.log('save CLicked');
-    console.log(e);
+    this.saveService.SaveRoutine(new Routine('Test', [new RoutineCycle(this.allInterval)]));
   }
 }
