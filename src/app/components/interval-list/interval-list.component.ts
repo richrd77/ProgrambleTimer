@@ -3,11 +3,16 @@ import {
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import { Timer } from '../../model/timer';
 import { Routine, RoutineCycle } from '../../model/routine';
 import { SaverService } from '../../services/saver.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-interval-list',
@@ -16,23 +21,53 @@ import { SaverService } from '../../services/saver.service';
 })
 export class IntervalListComponent implements OnInit, OnChanges {
   @Input() allInterval: Timer[];
-  canSave: boolean;
+  @Output() DisplayMessage: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private saveService: SaverService) {}
+  routineName: string;
+  showListRibbon: boolean;
+  showMessage: boolean;
+  message: string;
+  isError: boolean;
 
-  ngOnInit(): void {
-    this.canSave = this.allInterval.length > 0;
+  @ViewChild('newroutine')
+  private routineTemplte: TemplateRef<any>;
+
+  constructor(
+    private saveService: SaverService,
+    private viewRef: ViewContainerRef
+  ) {
+    this.showListRibbon = true;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.canSave = this.allInterval.length > 0;
+  get canSave() {
+    return this.allInterval.length > 0;
   }
+
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {}
 
   getEl(t: Timer) {
     return { 'background-color': t.Color };
   }
 
   SaveImgClicked(e: any): void {
-    this.saveService.SaveRoutine(new Routine('Test', [new RoutineCycle(this.allInterval)]));
+    this.DisplayMessage.emit('Please provide routine Name');
+    this.viewRef.createEmbeddedView(this.routineTemplte);
+    this.showListRibbon = false;
+  }
+
+  SaveNewRoutine(): void {
+    this.saveService.SaveRoutine(
+      new Routine(this.routineName, [new RoutineCycle(this.allInterval)])
+    );
+    this.DisplayMessage.emit('routine Saved!!!');
+    this.DoNotSaveNewRoutine();
+  }
+
+  DoNotSaveNewRoutine(): void {
+    this.routineName = '';
+    this.showListRibbon = true;
+    this.viewRef.clear();
   }
 }

@@ -221,15 +221,17 @@ export class TimerComponent implements OnInit {
     }, 1000);
   }
 
-  ShowMessage(msg: string): void {
+  ShowSuccessMessage(msg: string): void {
     this.message = msg;
     this.showMessage = true;
     this.isError = false;
+    setTimeout(() => this.showMessage = false, 2000);
   }
 
   ShowErrorMessage(msg: string): void {
     this.message = msg;
     this.showMessage = true;
     this.isError = true;
+    setTimeout(() => this.showMessage = false, 2000);
   }
 }

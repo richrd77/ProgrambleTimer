@@ -23,6 +23,8 @@ import { SaveImgComponent } from './components/imgs/save.component';
 import { SaverService } from './services/saver.service';
 import { Constants } from './constants';
 import { RepositoryService } from './services/repo.service';
+import { OpenImgComponent } from './components/imgs/open.component';
+import { EyeImgComponent } from './components/imgs/eye.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { RepositoryService } from './services/repo.service';
     SunImgComponent,
     DisabledDirective,
     MessageComponent,
-    SaveImgComponent
+    SaveImgComponent,
+    OpenImgComponent,
+    EyeImgComponent
   ],
   imports: [
     BrowserModule,

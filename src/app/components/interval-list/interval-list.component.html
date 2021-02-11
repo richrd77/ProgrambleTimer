@@ -7,20 +7,37 @@
       <td scope="col"></td>
     </thead>
     <tbody>
-      <tr
-        mdbTableCol
-        *ngFor="let t of allInterval | keyvalue; let i = index">
+      <tr mdbTableCol *ngFor="let t of allInterval | keyvalue; let i = index">
         <td class="normal-cell" scope="row">{{ t.value.Name }}</td>
         <td class="normal-cell numeric-cell">{{ t.value.Seconds }}</td>
         <td class="normal-cell numeric-cell">{{ t.value.Repetitions }}</td>
         <td class="color-cell">
           <span
             style="height: 1rem; width: 1rem; color: transparent"
-            [ngStyle]="getEl(t.value)">Color</span>
+            [ngStyle]="getEl(t.value)"
+            >Color</span
+          >
         </td>
       </tr>
     </tbody>
   </table>
-  <hr>
-  <app-save style="float: right;" [disabled]="!canSave" (clickEventListener)="SaveImgClicked($event)"></app-save>
+  <hr />
+  <div *ngIf="showListRibbon" style="display: flex; justify-content: space-evenly;">
+    <app-eye
+    style="float: right"
+    [disabled]="!canSave"
+    (clickEventListener)="SaveImgClicked($event)"
+  ></app-eye>
+  <app-open
+  style="float: right"
+  [disabled]="!canSave"
+  (clickEventListener)="SaveImgClicked($event)"
+></app-open>
+  </div>
+  <ng-template #newroutine>
+    <input type="text" placeholder="What should be the Name of this routine?" [(ngModel)]="routineName">
+    <div style="display: flex;justify-content: space-evenly;">
+      <button (click)="SaveNewRoutine()">Save</button> <button (click)="DoNotSaveNewRoutine()">Cancel</button>
+    </div>
+  </ng-template>
 </div>

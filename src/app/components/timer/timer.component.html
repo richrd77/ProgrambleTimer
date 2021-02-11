@@ -59,7 +59,7 @@
             </div>
             <div *ngSwitchCase="'list'">
               <app-interval-list
-                [allInterval]="allInterval"
+                [allInterval]="allInterval" (DisplayMessage)="ShowSuccessMessage($event)"
               ></app-interval-list>
             </div>
           </div>
