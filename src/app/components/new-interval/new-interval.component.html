@@ -35,13 +35,8 @@
         <input type="color" formControlName="color" />
       </div>
     </div>
-    <button
-      type="submit"
-      style="float: right"
-      class="timer-btn"
-      [disabled]="clicked"
-    >
-      Add
-    </button>
+    <div class="col-3 offset-9">
+      <app-button [btnText]="'Add'" style="width: 40%;" [disabled]="clicked"></app-button>
+    </div>
   </form>
 </div>

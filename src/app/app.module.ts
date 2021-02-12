@@ -26,6 +26,7 @@ import { RepositoryService } from './services/repo.service';
 import { OpenImgComponent } from './components/imgs/open.component';
 import { EyeImgComponent } from './components/imgs/eye.component';
 import { TextBoxComponent } from './components/custom-controls/textbox.component';
+import { ButtonComponent } from './components/custom-controls/button.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { TextBoxComponent } from './components/custom-controls/textbox.component
     SaveImgComponent,
     OpenImgComponent,
     EyeImgComponent,
-    TextBoxComponent
+    TextBoxComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,
