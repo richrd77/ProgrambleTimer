@@ -12,24 +12,14 @@
   >
     <div class="form-group">
       <div class="input-group">
-        <input
-          formControlName="newIntervalKey"
-          type="text"
-          class="form-field"
-          placeholder="Cycle Name"
-        />
+        <app-textbox (text)="CaptureIntervalName($event)" [inputProperties]="intervalKeyInputModel"></app-textbox>
       </div>
     </div>
     <div class="form-group">
       <div class="input-group controls">
         <div class="interval-place-holder">how long this cycle should be?</div>
         <div class="new-interval-container">
-          <input
-            type="number"
-            class="new-interval-holder"
-            formControlName="newInterval"
-            placeholder="0"
-          />
+          <app-textbox style="width: 45%;" (text)="CaptureIntervalValue($event)" [inputProperties]="intervalInputModel"></app-textbox>
           <select name="intervl-type" id="interval-type" class="interval-type" (change)="IntervalTypeChange($event)">
             <option value="s">Sec</option>
             <option value="m">Min</option>

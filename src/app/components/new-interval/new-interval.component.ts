@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Color } from 'src/app/model/color';
 import { Timer } from 'src/app/model/timer';
 import { Extensions } from '../../services/extensions';
+import * as InputModel from '../../model/input';
 
 @Component({
   selector: 'app-new-interval',
@@ -16,6 +17,8 @@ export class NewIntervalComponent implements OnInit {
   intervalStep = 5;
   clicked = false;
   isMultiplyRequired: boolean;
+  intervalInputModel: InputModel.Input;
+  intervalKeyInputModel: InputModel.Input;
 
   @Input() existingColors: Array<Color>;
   @Input() allInterval: Array<Timer>;
@@ -24,6 +27,13 @@ export class NewIntervalComponent implements OnInit {
   constructor(private ext: Extensions) {
     this.validationStatus = true;
     this.newlyCreatedItem = new EventEmitter<Timer>();
+    this.intervalInputModel = new InputModel.Input('number');
+    this.intervalInputModel.IsSevenSegmentFont = true;
+    this.intervalInputModel.PlaceHolder = '0';
+
+    this.intervalKeyInputModel = new InputModel.Input('text');
+    this.intervalKeyInputModel.IsSevenSegmentFont = false;
+    this.intervalKeyInputModel.PlaceHolder = 'Cycle Name';
   }
 
   ngOnInit(): void {
@@ -78,7 +88,11 @@ export class NewIntervalComponent implements OnInit {
     if (Number(this.NewInterval.value) > 0 && this.NewIntervalKey.value) {
       const newTimer = new Timer(
         this.NewIntervalKey.value,
-        Number(this.isMultiplyRequired ? this.NewInterval.value * 60 : this.NewInterval.value),
+        Number(
+          this.isMultiplyRequired
+            ? this.NewInterval.value * 60
+            : this.NewInterval.value
+        ),
         this.Color.value
       );
       if (
@@ -124,5 +138,13 @@ export class NewIntervalComponent implements OnInit {
     } else {
       this.isMultiplyRequired = false;
     }
+  }
+
+  CaptureIntervalValue(event: string): void {
+    this.newIntervalFormGroup.get('newInterval').setValue(event);
+  }
+
+  CaptureIntervalName(event: string): void {
+    this.newIntervalFormGroup.get('newIntervalKey').setValue(event);
   }
 }

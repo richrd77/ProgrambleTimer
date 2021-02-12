@@ -24,19 +24,19 @@ select {
   border-color: var(--controls-color);
 }
 
-::-webkit-input-placeholder {
-  /* Edge */
-  color: var(--controls-color);
-}
+// ::-webkit-input-placeholder {
+//   /* Edge */
+//   color: var(--controls-color);
+// }
 
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: var(--controls-color);
-}
+// :-ms-input-placeholder {
+//   /* Internet Explorer 10-11 */
+//   color: var(--controls-color);
+// }
 
-::placeholder {
-  color: var(--controls-color);
-}
+// ::placeholder {
+//   color: var(--controls-color);
+// }
 
 .interval-input {
   width: 100%;

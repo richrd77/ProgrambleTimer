@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* You can add global styles to this file, and also import other style files */
 :root {
   --newitemsize: 7rem;
@@ -18,6 +24,11 @@
   --bgColor: #0000006b;
 }
 
+.noUI-control {
+  pointer-events: none;
+  user-select: none;
+}
+
 @font-face {
   font-family: "Ubuntu", sans-serif;
   src: url("./assets/font/ubuntu/Ubuntu-Regular.ttf");
@@ -29,6 +40,20 @@
 }
 * {
   font-family: "Ubuntu", sans-serif;
+}
+
+::-webkit-input-placeholder {
+  /* Edge */
+  color: var(--controls-color);
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--controls-color);
+}
+
+::placeholder {
+  color: var(--controls-color);
 }
 
 .clickable {
