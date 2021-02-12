@@ -22,22 +22,30 @@
     </tbody>
   </table>
   <hr />
-  <div *ngIf="showListRibbon" style="display: flex; justify-content: space-evenly;">
+  <div
+    *ngIf="showListRibbon"
+    style="display: flex; justify-content: space-evenly"
+  >
     <app-eye
-    style="float: right"
-    [disabled]="!canSave"
-    (clickEventListener)="SaveImgClicked($event)"
-  ></app-eye>
-  <app-open
-  style="float: right"
-  [disabled]="!canSave"
-  (clickEventListener)="SaveImgClicked($event)"
-></app-open>
+      [disabled]="!canSave"
+      (clickEventListener)="SaveImgClicked($event)"
+    ></app-eye>
+    <app-save
+      [disabled]="!canSave"
+      (clickEventListener)="SaveImgClicked($event)"
+    ></app-save>
   </div>
   <ng-template #newroutine>
-    <input type="text" placeholder="What should be the Name of this routine?" [(ngModel)]="routineName">
-    <div style="display: flex;justify-content: space-evenly;">
-      <button (click)="SaveNewRoutine()">Save</button> <button (click)="DoNotSaveNewRoutine()">Cancel</button>
+    <app-textbox
+      [inputProperties]="routineNameInput"
+      (text)="CatchTextEvent($event)"
+    ></app-textbox>
+    <div style="display: flex; justify-content: space-evenly; margin-top: 1rem">
+      <app-button [btnText]="'Save'" (btnClick)="SaveNewRoutine()"></app-button>
+      <app-button
+        [btnText]="'Cancel'"
+        (btnClick)="DoNotSaveNewRoutine()"
+      ></app-button>
     </div>
   </ng-template>
 </div>

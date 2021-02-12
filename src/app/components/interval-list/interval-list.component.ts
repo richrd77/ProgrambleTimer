@@ -13,6 +13,7 @@ import { Timer } from '../../model/timer';
 import { Routine, RoutineCycle } from '../../model/routine';
 import { SaverService } from '../../services/saver.service';
 import { EventEmitter } from '@angular/core';
+import * as InputModel from '../../model/input';
 
 @Component({
   selector: 'app-interval-list',
@@ -28,7 +29,7 @@ export class IntervalListComponent implements OnInit, OnChanges {
   showMessage: boolean;
   message: string;
   isError: boolean;
-
+  routineNameInput: InputModel.Input;
   @ViewChild('newroutine')
   private routineTemplte: TemplateRef<any>;
 
@@ -37,6 +38,9 @@ export class IntervalListComponent implements OnInit, OnChanges {
     private viewRef: ViewContainerRef
   ) {
     this.showListRibbon = true;
+    this.routineNameInput = new InputModel.Input('text');
+    this.routineNameInput.IsSevenSegmentFont = false;
+    this.routineNameInput.PlaceHolder = 'Name of this routine?';
   }
 
   get canSave() {
@@ -69,5 +73,9 @@ export class IntervalListComponent implements OnInit, OnChanges {
     this.routineName = '';
     this.showListRibbon = true;
     this.viewRef.clear();
+  }
+
+  CatchTextEvent(event: any): void {
+    this.routineName = event;
   }
 }
