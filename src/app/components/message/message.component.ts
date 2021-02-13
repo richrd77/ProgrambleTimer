@@ -60,8 +60,6 @@ export class MessageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('chnged');
-    console.log(this.Show);
     this.HideMessage(this.Show);
   }
 

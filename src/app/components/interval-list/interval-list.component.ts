@@ -14,6 +14,8 @@ import { Routine, RoutineCycle } from '../../model/routine';
 import { SaverService } from '../../services/saver.service';
 import { EventEmitter } from '@angular/core';
 import * as InputModel from '../../model/input';
+import { TableInputs, TableKey } from 'src/app/model/table';
+import { TableColType } from 'src/app/model/enums/tableColumnTypes.enum';
 
 @Component({
   selector: 'app-interval-list',
@@ -33,6 +35,8 @@ export class IntervalListComponent implements OnInit, OnChanges {
   @ViewChild('newroutine')
   private routineTemplte: TemplateRef<any>;
 
+  tbl: TableInputs<Timer>;
+
   constructor(
     private saveService: SaverService,
     private viewRef: ViewContainerRef
@@ -41,13 +45,24 @@ export class IntervalListComponent implements OnInit, OnChanges {
     this.routineNameInput = new InputModel.Input('text');
     this.routineNameInput.IsSevenSegmentFont = false;
     this.routineNameInput.PlaceHolder = 'Name of this routine?';
+    this.tbl = new TableInputs<Timer>();
   }
 
   get canSave() {
     return this.allInterval.length > 0;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.tbl.Keys = [
+      new TableKey('Name', 'Name'),
+      new TableKey('Seconds', 'Time (in sec)', TableColType.SevenSegment),
+      new TableKey('Repetitions', 'Repetitions', TableColType.SevenSegment),
+      new TableKey('Color', '', TableColType.Color),
+    ];
+    if (this.allInterval.length > 0) {
+      this.tbl.Items = this.allInterval;
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {}
 
