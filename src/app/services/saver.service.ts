@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Routine } from '../model/routine';
 import { RepositoryService } from './repo.service';
 import { Constants } from '../constants';
-import { Extensions } from './extensions';
 
 @Injectable()
 export class SaverService {
-  constructor(
-    private repo: RepositoryService,
-    private constants: Constants
-  ) {}
+  constructor(private repo: RepositoryService, private constants: Constants) {}
 
   IsDarkModeOn(): boolean {
-    return this.repo.GetTheme();
+    return this.repo.Theme;
+  }
+
+  ToggleDarkMode(): boolean {
+    return (this.repo.Theme = !this.repo.Theme);
   }
 
   SaveRoutine(newRoutine: Routine): void {
@@ -33,5 +33,9 @@ export class SaverService {
       existingRoutine.push(newRoutine);
     }
     this.repo.SetDataFromDevice(this.constants.RoutineKey, existingRoutine);
+  }
+
+  GetRoutine(): Routine[] {
+    return this.repo.GetDataFromDevice<Routine[]>(this.constants.RoutineKey);
   }
 }

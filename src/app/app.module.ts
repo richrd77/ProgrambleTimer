@@ -28,6 +28,7 @@ import { EyeImgComponent } from './components/imgs/eye.component';
 import { TextBoxComponent } from './components/custom-controls/textbox.component';
 import { ButtonComponent } from './components/custom-controls/button.component';
 import { TableComponent } from './components/custom-controls/table.component';
+import { ViewRoutineComponent } from './components/view-routine.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TableComponent } from './components/custom-controls/table.component';
     EyeImgComponent,
     TextBoxComponent,
     ButtonComponent,
-    TableComponent
+    TableComponent,
+    ViewRoutineComponent
   ],
   imports: [
     BrowserModule,

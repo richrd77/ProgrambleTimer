@@ -200,11 +200,10 @@ export class TimerComponent implements OnInit {
   ToggleTheme(isDarkModeEnabled: boolean): void {
     if (isDarkModeEnabled) {
       this.renderer.addClass(document.body, 'dark-mode');
-      localStorage.setItem('isDark', 'true');
     } else {
       this.renderer.removeClass(document.body, 'dark-mode');
-      localStorage.setItem('isDark', 'false');
     }
+    this.saverService.ToggleDarkMode();
   }
 
   StartPlainTimer(): void {
@@ -225,13 +224,13 @@ export class TimerComponent implements OnInit {
     this.message = msg;
     this.showMessage = true;
     this.isError = false;
-    setTimeout(() => this.showMessage = false, 2000);
+    setTimeout(() => (this.showMessage = false), 2000);
   }
 
   ShowErrorMessage(msg: string): void {
     this.message = msg;
     this.showMessage = true;
     this.isError = true;
-    setTimeout(() => this.showMessage = false, 2000);
+    setTimeout(() => (this.showMessage = false), 2000);
   }
 }

@@ -6,10 +6,14 @@ import { Extensions } from './extensions';
 export class RepositoryService {
   constructor(private extensions: Extensions, private constants: Constants) {}
 
-  GetTheme(): boolean {
+  get Theme(): boolean {
     return this.extensions.ToBoolean(
       localStorage.getItem(this.constants.DarkModeKey)
     );
+  }
+
+  set Theme(newValue: boolean) {
+      localStorage.setItem(this.constants.DarkModeKey, `${newValue}`);
   }
 
   GetDataFromDevice<returnType>(localStorageKey: string): returnType {
