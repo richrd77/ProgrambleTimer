@@ -1,20 +1,15 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TableInputs, TableKey } from '../../model/table';
 import { TableColType } from '../../model/enums/tableColumnTypes.enum';
 
 @Component({
   selector: 'app-table',
-  template: `<table class="table table-striped table-theme">
+  template: `<table class="table table-striped table-theme noUI-control">
     <thead>
       <td *ngFor="let h of tblInput.Keys" scope="col">{{ h.DisplayText }}</td>
     </thead>
-    <tbody *ngIf="tblInput">
+    <tbody>
+      <ng-container *ngIf="tblInput">
       <tr mdbTableCol *ngFor="let t of tblInput.Items">
         <td
           *ngFor="let k of tblInput.Keys"
@@ -39,6 +34,7 @@ import { TableColType } from '../../model/enums/tableColumnTypes.enum';
           </ng-template>
         </td>
       </tr>
+      </ng-container>
     </tbody>
   </table>`,
   styles: [
@@ -63,12 +59,9 @@ import { TableColType } from '../../model/enums/tableColumnTypes.enum';
     `,
   ],
 })
-export class TableComponent implements OnInit, OnChanges {
+export class TableComponent {
   @Input() tblInput: TableInputs<any>;
   tableColType = TableColType;
-  ngOnInit(): void {}
-
-  ngOnChanges() {}
 
   IsNormalCell(tblKey: TableKey): boolean {
     return tblKey.Type === this.tableColType.Normal;
