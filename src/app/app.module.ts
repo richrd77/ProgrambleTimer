@@ -29,6 +29,7 @@ import { TextBoxComponent } from './components/custom-controls/textbox.component
 import { ButtonComponent } from './components/custom-controls/button.component';
 import { TableComponent } from './components/custom-controls/table.component';
 import { ViewRoutineComponent } from './components/view-routine.component';
+import { PanelComponent } from './components/custom-controls/panel.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ViewRoutineComponent } from './components/view-routine.component';
     TextBoxComponent,
     ButtonComponent,
     TableComponent,
-    ViewRoutineComponent
+    ViewRoutineComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,

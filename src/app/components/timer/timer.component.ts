@@ -53,9 +53,7 @@ export class TimerComponent implements OnInit {
     this.allColors = [];
   }
 
-  ngOnInit(): void {
-    this.ToggleTheme(this.saverService.IsDarkModeOn());
-  }
+  ngOnInit(): void {}
 
   StartTimer(): void {
     this.currentItem = this.allInterval[this.currentIndex];
