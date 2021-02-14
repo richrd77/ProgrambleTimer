@@ -6,8 +6,8 @@
     style="display: flex; justify-content: space-evenly"
   >
     <app-eye
-      [disabled]="!canSave"
-      (clickEventListener)="SaveImgClicked($event)"
+      [disabled]="!canView"
+      (clickEventListener)="EyeClickEvent($event)"
     ></app-eye>
     <app-save
       [disabled]="!canSave"

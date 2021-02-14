@@ -170,10 +170,13 @@ export class TimerComponent implements OnInit {
     this.menuItemName = name;
     if (name === 'New-Item') {
       this.modalHeader = 'New Interval';
+      this.open(this.newItemModal);
+    } else if (name === 'view-routine') {
+      this.modalHeader = 'Routine';
     } else {
       this.modalHeader = 'List of Interval';
+      this.open(this.newItemModal);
     }
-    this.open(this.newItemModal);
   }
 
   ClearThings(): void {

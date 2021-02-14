@@ -14,18 +14,16 @@ import { Component, Input, TemplateRef } from '@angular/core';
       >
         <ng-container *ngTemplateOutlet="PanelHeader"></ng-container>
       </div>
-      <div
-        [ngClass]="{
-          'collapsible-content': !isShowing,
-          'collapsible-content-show': isShowing
-        }"
-      >
+      <div *ngIf="isShowing" style="margin-left: 1.25rem;">
         <ng-container *ngTemplateOutlet="PanelBody"></ng-container>
       </div>
     </div>
   `,
   styles: [
     `
+      .collapsible-wrapper {
+        margin-bottom: 1rem;
+      }
       .collapsible {
         border: 0.01rem solid var(--controls-color);
         width: auto;
@@ -65,7 +63,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
 
       .collapsible-content-show {
         display: block;
-        padding: 1.25rem;
+        /* padding: 1.25rem; */
         margin-left: 1.25rem;
       }
     `,

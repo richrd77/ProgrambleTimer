@@ -30,6 +30,7 @@ import { ButtonComponent } from './components/custom-controls/button.component';
 import { TableComponent } from './components/custom-controls/table.component';
 import { ViewRoutineComponent } from './components/view-routine.component';
 import { PanelComponent } from './components/custom-controls/panel.component';
+import { GroupedTableComponent } from './components/grouped-table.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { PanelComponent } from './components/custom-controls/panel.component';
     ButtonComponent,
     TableComponent,
     ViewRoutineComponent,
-    PanelComponent
+    PanelComponent,
+    GroupedTableComponent
   ],
   imports: [
     BrowserModule,

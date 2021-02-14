@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SaverService } from '../services/saver.service';
 import { Routine } from '../model/routine';
 import { TableKey } from '../model/table';
@@ -7,14 +7,15 @@ import { TableColType } from '../model/enums/tableColumnTypes.enum';
 @Component({
   selector: 'app-view-routine',
   template: `
-    <section *ngFor="let r of existingRoutine">
+    <section *ngFor="let r of existingRoutine" style="margin-bottom:1rem">
       {{ r.Name }}
-      <div *ngFor="let c of r.Cycles">
-        <div>{{ c.SavedOn }}</div>
-        <app-table
-          [tblInput]="{ Items: c.Cycles, Keys: displayKeys }"
-        ></app-table>
-      </div>
+      <ng-container *ngFor="let c of r.Cycles">
+        <app-grouped-table
+          [Naam]="r.Name"
+          [routineCycle1]="c"
+          [displayKeys]="displayKeys"
+        ></app-grouped-table>
+      </ng-container>
     </section>
   `,
   styles: [``],
@@ -22,6 +23,7 @@ import { TableColType } from '../model/enums/tableColumnTypes.enum';
 export class ViewRoutineComponent {
   existingRoutine: Routine[];
   displayKeys: TableKey[];
+
   constructor(private ser: SaverService) {
     this.existingRoutine = this.ser.GetRoutine();
     this.displayKeys = [

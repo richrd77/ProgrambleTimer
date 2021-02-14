@@ -25,6 +25,7 @@ import { TableColType } from 'src/app/model/enums/tableColumnTypes.enum';
 export class IntervalListComponent implements OnInit, OnChanges {
   @Input() allInterval: Timer[];
   @Output() DisplayMessage: EventEmitter<string> = new EventEmitter<string>();
+  @Output() ViewRoutineClick: EventEmitter<string> = new EventEmitter<string>();
 
   routineName: string;
   showListRibbon: boolean;
@@ -50,6 +51,14 @@ export class IntervalListComponent implements OnInit, OnChanges {
 
   get canSave() {
     return this.allInterval.length > 0;
+  }
+
+  get canView() {
+    const routine = this.saveService.GetRoutine();
+    if (routine) {
+      return routine.length > 0;
+    }
+    return false;
   }
 
   ngOnInit(): void {
@@ -92,5 +101,9 @@ export class IntervalListComponent implements OnInit, OnChanges {
 
   CatchTextEvent(event: any): void {
     this.routineName = event;
+  }
+
+  EyeClickEvent(evet: any): void {
+    this.ViewRoutineClick.emit('view-routine');
   }
 }
