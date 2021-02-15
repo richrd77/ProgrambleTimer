@@ -103,7 +103,7 @@ export class IntervalListComponent implements OnInit, OnChanges {
     this.routineName = event;
   }
 
-  EyeClickEvent(evet: any): void {
-    this.ViewRoutineClick.emit('view-routine');
+  EyeClickEvent(evet: string): void {
+    this.ViewRoutineClick.emit(evet);
   }
 }

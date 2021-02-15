@@ -5,9 +5,13 @@
     *ngIf="showListRibbon"
     style="display: flex; justify-content: space-evenly"
   >
+    <app-graph-img
+      [disabled]="!canView"
+      (clickEventListener)="EyeClickEvent('view-graph')"
+    ></app-graph-img>
     <app-eye
       [disabled]="!canView"
-      (clickEventListener)="EyeClickEvent($event)"
+      (clickEventListener)="EyeClickEvent('view-routine')"
     ></app-eye>
     <app-save
       [disabled]="!canSave"

@@ -31,6 +31,7 @@ import { TableComponent } from './components/custom-controls/table.component';
 import { ViewRoutineComponent } from './components/view-routine.component';
 import { PanelComponent } from './components/custom-controls/panel.component';
 import { GroupedTableComponent } from './components/grouped-table.component';
+import { GraphImgComponent } from './components/imgs/graph.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { GroupedTableComponent } from './components/grouped-table.component';
     TableComponent,
     ViewRoutineComponent,
     PanelComponent,
-    GroupedTableComponent
+    GroupedTableComponent,
+    GraphImgComponent
   ],
   imports: [
     BrowserModule,

@@ -173,6 +173,8 @@ export class TimerComponent implements OnInit {
       this.open(this.newItemModal);
     } else if (name === 'view-routine') {
       this.modalHeader = 'Routine';
+    } else if (name === 'view-graph') {
+      this.modalHeader = 'Overview';
     } else {
       this.modalHeader = 'List of Interval';
       this.open(this.newItemModal);

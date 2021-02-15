@@ -60,11 +60,14 @@
             <div *ngSwitchCase="'list'">
               <app-interval-list
                 [allInterval]="allInterval" (DisplayMessage)="ShowSuccessMessage($event)"
-                (ViewRoutineClick)="RibbonItemClickEvent('view-routine')"
+                (ViewRoutineClick)="RibbonItemClickEvent($event)"
               ></app-interval-list>
             </div>
             <div *ngSwitchCase="'view-routine'">
               <app-view-routine></app-view-routine>
+            </div>
+            <div *ngSwitchCase="'view-graph'">
+              graph comes here
             </div>
           </div>
         </div>
