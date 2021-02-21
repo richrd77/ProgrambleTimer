@@ -14,19 +14,25 @@ import {
   template: `
     <div class="screen-wrapper">
       <div
+        *ngIf="!hideScreen"
         class="screen"
         [ngClass]="{ hide: toggleScreen }"
-        [ngStyle]="{ display: hideScreen ? 'none' : '' }"
       >
-        <ng-container *ngTemplateOutlet="screen1"></ng-container>
+        <ng-container [ngTemplateOutlet]="screen1"></ng-container>
       </div>
       <div
+        *ngIf="hideScreen"
         class="screen"
         [ngClass]="{ hide: !toggleScreen }"
-        [ngStyle]="{ display: !hideScreen ? 'none' : '' }"
       >
-        <div class="clickable" style="width:fit-content;margin-bottom: 0.5rem;" (click)="GoBack()">&#8592; Back</div>
-        <ng-container *ngTemplateOutlet="screen2"></ng-container>
+        <div
+          class="clickable"
+          style="width:fit-content;margin-bottom: 0.5rem;"
+          (click)="GoBack()"
+        >
+          &#8592; Back
+        </div>
+        <ng-container [ngTemplateOutlet]="screen2"></ng-container>
       </div>
     </div>
   `,
