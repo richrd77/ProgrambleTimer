@@ -50,4 +50,33 @@ export class Extensions {
   ToBoolean(value: string): boolean {
     return value === 'true';
   }
+
+  GetRelativeDate(value: Date): any {
+    let isInRange = false;
+    const currentDate = new Date();
+    if (
+      currentDate.getFullYear() === value.getFullYear() &&
+      currentDate.getMonth() === value.getMonth() &&
+      (currentDate.getDate() - 1 === value.getDate() ||
+        currentDate.getDate() === value.getDate() ||
+        currentDate.getDate() + 1 === value.getDate())
+    ) {
+      isInRange = true;
+      return {
+        isInRange,
+        parseDate: () => {
+          const dif = currentDate.getDate() - value.getDate();
+          if (dif === 0) {
+            return `Today @ ${value.toLocaleTimeString()}`;
+          } else if (dif === 1) {
+            return `Yesterdy @ ${value.toLocaleTimeString()}`;
+          } else if (dif === -1) {
+            return `Tomorrow @ ${value.toLocaleTimeString()}`;
+          }
+        },
+      };
+    } else {
+      return { isInRange, parseDate: () => {} };
+    }
+  }
 }

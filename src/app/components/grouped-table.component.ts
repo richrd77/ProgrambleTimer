@@ -6,9 +6,15 @@ import { TableKey } from '../model/table';
   selector: 'app-grouped-table',
   template: `
     <!-- {{ Naam }} -->
-    <app-panel [PanelHeader]="header" [PanelBody]="body" style="margin-bottom:1rem"></app-panel>
+    <app-panel
+      [PanelHeader]="header"
+      [PanelBody]="body"
+      style="margin-bottom:1rem"
+    ></app-panel>
     <ng-template #head>
-      <span>Performed on {{ routineCycle1.SavedOn }}</span>
+      <span
+        >Performed on {{ routineCycle1.SavedOn | customDate }}</span
+      >
     </ng-template>
     <ng-template #boody>
       <app-table

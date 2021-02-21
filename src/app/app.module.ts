@@ -33,6 +33,7 @@ import { PanelComponent } from './components/custom-controls/panel.component';
 import { GroupedTableComponent } from './components/grouped-table.component';
 import { GraphImgComponent } from './components/imgs/graph.component';
 import { AnimateScreenComponent } from './components/custom-controls/animate-screen.component';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { AnimateScreenComponent } from './components/custom-controls/animate-scr
     PanelComponent,
     GroupedTableComponent,
     GraphImgComponent,
-    AnimateScreenComponent
+    AnimateScreenComponent,
+    CustomDatePipe
   ],
   imports: [
     BrowserModule,
