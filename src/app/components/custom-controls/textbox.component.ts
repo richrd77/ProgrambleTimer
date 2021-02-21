@@ -14,6 +14,11 @@ import * as InputModel from '../../model/input';
   `,
   styles: [
     `
+      .new-interval-holder:focus,
+      .new-interval-holder:active {
+        outline: 0;
+        box-shadow: var(--highlight-color) 0rem 0rem 0.75rem 0.01rem;
+      }
       .new-interval-holder {
         display: inline-block;
         font-size: 2.5rem;

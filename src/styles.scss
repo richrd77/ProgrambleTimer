@@ -16,12 +16,14 @@
   --controls-color: black;
   --bgColor: #ffffff80;
   --controls-disabled-color: grey;
+  --highlight-color: #1818f4;
   //--bgColor: #000000cc; - dark mode
 }
 
 .dark-mode {
   --controls-color: #ffffff;
   --bgColor: #0000006b;
+  --highlight-color: blue;
 }
 
 .noUI-control {
@@ -80,4 +82,19 @@ input[type="Number"] {
   border-top: 0.75rem solid transparent;
   border-bottom: 0.75rem solid transparent;
   border-left: 0.75rem solid var(--controls-color);
+}
+
+.basic-focus {
+  outline: 0;
+  box-shadow: var(--highlight-color) 0rem 0rem 0.75rem 0.01rem;
+}
+
+input[type="color"]:focus,
+input[type="color"]:active {
+  @extend .basic-focus;
+}
+
+select:focus,
+select:active {
+  @extend .basic-focus;
 }
