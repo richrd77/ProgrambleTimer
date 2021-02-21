@@ -1,6 +1,14 @@
-import { Component, ViewChild, TemplateRef, Input } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  TemplateRef,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { RoutineCycle } from '../model/routine';
 import { TableKey } from '../model/table';
+import { Timer } from '../model/timer';
 
 @Component({
   selector: 'app-grouped-table',
@@ -20,7 +28,10 @@ import { TableKey } from '../model/table';
       ></app-table>
     </ng-template>
     <ng-template #tblRibbon>
-      <app-button [btnText]="'Perform this now'"></app-button>
+      <app-button
+        [btnText]="'Perform this now'"
+        (btnClick)="btnClicked($event)"
+      ></app-button>
     </ng-template>
   `,
   styles: [
@@ -35,6 +46,7 @@ import { TableKey } from '../model/table';
 export class GroupedTableComponent {
   @Input() routineCycle1: RoutineCycle;
   @Input() displayKeys: TableKey[];
+  @Output() importClick: EventEmitter<Timer[]> = new EventEmitter<Timer[]>();
 
   @ViewChild('head', { static: true })
   header: TemplateRef<any>;
@@ -44,4 +56,8 @@ export class GroupedTableComponent {
 
   @ViewChild('tblRibbon', { static: true })
   tblRibbon: TemplateRef<any>;
+
+  btnClicked(event: any) {
+    this.importClick.emit(this.routineCycle1.Cycles);
+  }
 }

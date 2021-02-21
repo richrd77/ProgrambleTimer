@@ -89,7 +89,7 @@
 </ng-template>
 
 <ng-template #routine>
-  <app-view-routine></app-view-routine>
+  <app-view-routine (importCycleEvent)="ImportCycles($event)"></app-view-routine>
 </ng-template>
 
 <ng-template #gr>

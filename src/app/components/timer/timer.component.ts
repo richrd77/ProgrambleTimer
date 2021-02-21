@@ -189,7 +189,6 @@ export class TimerComponent implements OnInit {
       this.screen1 = this.newItemTemplate;
       this.screen2 = this.newItemTemplate;
       this.toggleScreen = false;
-      this.open(this.newItemModal);
     } else if (name === 'view-routine') {
       this.modalHeader = 'Routine';
       this.screen1 = this.listTemplate;
@@ -205,6 +204,9 @@ export class TimerComponent implements OnInit {
       this.toggleScreen = false;
       this.screen1 = this.listTemplate;
       this.screen2 = this.listTemplate;
+    }
+
+    if (!this.IsModalOpen) {
       this.open(this.newItemModal);
     }
   }
@@ -289,5 +291,19 @@ export class TimerComponent implements OnInit {
     this.allInterval = this.allInterval.filter(
       (item) => item.Name !== index.Name
     );
+
+    if (this.allInterval.length === 0) {
+      this.ClearThings();
+    }
+  }
+
+  ImportCycles(cycles: Timer[]): void {
+    this.ClearThings();
+    this.allInterval = cycles.map((i) => new Timer(i.Name, i.Seconds, i.Color));
+    this.RibbonItemClickEvent('whImportCycles');
+  }
+
+  get IsModalOpen(): boolean {
+    return document.body.classList.contains('modal-open');
   }
 }
