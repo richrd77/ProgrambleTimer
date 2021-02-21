@@ -16,14 +16,12 @@ import { PlayImgComponent } from './components/imgs/play.component';
 import { PlusImgComponent } from './components/imgs/plus.component';
 import { RefreshImgComponent } from './components/imgs/refresh.component';
 import { MoonImgComponent } from './components/imgs/moon.component';
-import { SunImgComponent } from './components/imgs/sun.component';
 import { DisabledDirective } from './directives/disabled.directive';
 import { MessageComponent } from './components/message/message.component';
 import { SaveImgComponent } from './components/imgs/save.component';
 import { SaverService } from './services/saver.service';
 import { Constants } from './constants';
 import { RepositoryService } from './services/repo.service';
-import { OpenImgComponent } from './components/imgs/open.component';
 import { EyeImgComponent } from './components/imgs/eye.component';
 import { TextBoxComponent } from './components/custom-controls/textbox.component';
 import { ButtonComponent } from './components/custom-controls/button.component';
@@ -47,11 +45,9 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
     PlusImgComponent,
     RefreshImgComponent,
     MoonImgComponent,
-    SunImgComponent,
     DisabledDirective,
     MessageComponent,
     SaveImgComponent,
-    OpenImgComponent,
     EyeImgComponent,
     TextBoxComponent,
     ButtonComponent,
