@@ -1,10 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
 import { TableInputs, TableKey } from '../../model/table';
 import { TableColType } from '../../model/enums/tableColumnTypes.enum';
 
 @Component({
   selector: 'app-table',
-  template: `<table class="table table-striped table-theme">
+  template: `
+  <ng-container *ngIf="tblRibbon" [ngTemplateOutlet]="tblRibbon"></ng-container>
+  <table class="table table-striped table-theme">
     <thead>
       <td *ngFor="let h of tblInput.Keys" class="noUI-control" scope="col">
         {{ h.DisplayText }}
@@ -71,6 +73,7 @@ import { TableColType } from '../../model/enums/tableColumnTypes.enum';
   ],
 })
 export class TableComponent {
+  @Input() tblRibbon: TemplateRef<any>;
   @Input() tblInput: TableInputs<any>;
   @Output() rowClickEvent: EventEmitter<any> = new EventEmitter<any>();
   tableColType = TableColType;

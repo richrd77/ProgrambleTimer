@@ -33,6 +33,7 @@ import { GraphImgComponent } from './components/imgs/graph.component';
 import { AnimateScreenComponent } from './components/custom-controls/animate-screen.component';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { TrashImgComponent } from './components/imgs/trash.component';
+import { ConfirmMessageComponent } from './components/dialogs/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { TrashImgComponent } from './components/imgs/trash.component';
     GraphImgComponent,
     AnimateScreenComponent,
     CustomDatePipe,
-    TrashImgComponent
+    TrashImgComponent,
+    ConfirmMessageComponent
   ],
   imports: [
     BrowserModule,

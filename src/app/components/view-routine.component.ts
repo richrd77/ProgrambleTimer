@@ -11,7 +11,6 @@ import { TableColType } from '../model/enums/tableColumnTypes.enum';
       {{ r.Name }}
       <ng-container *ngFor="let c of r.Cycles">
         <app-grouped-table
-          [Naam]="r.Name"
           [routineCycle1]="c"
           [displayKeys]="displayKeys"
         ></app-grouped-table>
