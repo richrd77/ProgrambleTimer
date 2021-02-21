@@ -275,12 +275,14 @@ export class TimerComponent implements OnInit {
   }
 
   ChangeModalHeader(header: string, overrideHeader: boolean = false): void {
-    if (overrideHeader) {
-      this.saverService.ModalHeader = header;
-      this.modalHeader = header;
-    } else {
-      this.modalHeader = this.saverService.ModalHeader;
-    }
+    setTimeout(() => {
+      if (overrideHeader) {
+        this.saverService.ModalHeader = header;
+        this.modalHeader = header;
+      } else {
+        this.modalHeader = this.saverService.ModalHeader;
+      }
+    }, 500);
   }
 
   DeleteTimer(index: Timer) {
