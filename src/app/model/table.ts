@@ -9,7 +9,8 @@ export class TableKey {
   Key: string;
   DisplayText: string;
   Type: TableColType;
-  constructor(key: string, text: string, colType: TableColType = null) {
+  CanDelete: boolean;
+  constructor(key: string, text: string, colType: TableColType = null, canDelete: boolean = false) {
     this.Key = key;
     this.DisplayText = text;
     if (colType === null) {
@@ -17,5 +18,6 @@ export class TableKey {
     } else {
       this.Type = colType;
     }
+    this.CanDelete = canDelete;
   }
 }

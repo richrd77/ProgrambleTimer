@@ -282,4 +282,10 @@ export class TimerComponent implements OnInit {
       this.modalHeader = this.saverService.ModalHeader;
     }
   }
+
+  DeleteTimer(index: Timer) {
+    this.allInterval = this.allInterval.filter(
+      (item) => item.Name !== index.Name
+    );
+  }
 }

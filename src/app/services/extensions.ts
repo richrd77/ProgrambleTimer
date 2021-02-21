@@ -67,16 +67,28 @@ export class Extensions {
         parseDate: () => {
           const dif = currentDate.getDate() - value.getDate();
           if (dif === 0) {
-            return `Today @ ${value.toLocaleTimeString()}`;
+            return `Today @ ${this.GetFormattedTimeStamp(value)}`;
           } else if (dif === 1) {
-            return `Yesterdy @ ${value.toLocaleTimeString()}`;
+            return `Yesterdy @ ${this.GetFormattedTimeStamp(value)}`;
           } else if (dif === -1) {
-            return `Tomorrow @ ${value.toLocaleTimeString()}`;
+            return `Tomorrow @ ${this.GetFormattedTimeStamp(value)}`;
           }
         },
       };
     } else {
       return { isInRange, parseDate: () => {} };
+    }
+  }
+
+  GetFormattedTimeStamp(value: Date): string {
+    const hh = value.getHours();
+    const mm = value.getMinutes();
+    if (hh > 12) {
+      return `${hh - 12}:${mm} PM`;
+    } else if (hh === 12) {
+      return `${hh}:${mm} PM`;
+    } else {
+      return `${hh}:${mm} AM`;
     }
   }
 }

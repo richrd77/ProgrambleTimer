@@ -32,6 +32,7 @@ import { GroupedTableComponent } from './components/grouped-table.component';
 import { GraphImgComponent } from './components/imgs/graph.component';
 import { AnimateScreenComponent } from './components/custom-controls/animate-screen.component';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
+import { TrashImgComponent } from './components/imgs/trash.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
     GroupedTableComponent,
     GraphImgComponent,
     AnimateScreenComponent,
-    CustomDatePipe
+    CustomDatePipe,
+    TrashImgComponent
   ],
   imports: [
     BrowserModule,

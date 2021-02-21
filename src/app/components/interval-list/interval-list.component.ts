@@ -26,6 +26,7 @@ export class IntervalListComponent implements OnInit, OnChanges {
   @Input() allInterval: Timer[];
   @Output() DisplayMessage: EventEmitter<string> = new EventEmitter<string>();
   @Output() ViewRoutineClick: EventEmitter<string> = new EventEmitter<string>();
+  @Output() DeleteTimerClick: EventEmitter<Timer> = new EventEmitter<Timer>();
 
   routineName: string;
   showListRibbon: boolean;
@@ -63,14 +64,12 @@ export class IntervalListComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.tbl.Keys = [
-      new TableKey('Name', 'Name'),
+      new TableKey('Name', 'Name', undefined, true),
       new TableKey('Seconds', 'Time (in sec)', TableColType.SevenSegment),
       new TableKey('Repetitions', 'Repetitions', TableColType.SevenSegment),
       new TableKey('Color', '', TableColType.Color),
     ];
-    if (this.allInterval.length > 0) {
-      this.tbl.Items = this.allInterval;
-    }
+    this.tbl.Items = this.allInterval;
   }
 
   ngOnChanges(changes: SimpleChanges): void {}
@@ -105,5 +104,12 @@ export class IntervalListComponent implements OnInit, OnChanges {
 
   EyeClickEvent(evet: string): void {
     this.ViewRoutineClick.emit(evet);
+  }
+
+  TrashClickEvent(index: Timer): void {
+    this.DeleteTimerClick.emit(index);
+    setInterval(() => {
+      this.ngOnInit();
+    }, 500);
   }
 }

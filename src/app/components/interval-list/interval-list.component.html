@@ -1,5 +1,5 @@
 <div class="interval-list">
-  <app-table [tblInput]="tbl"></app-table>
+  <app-table [tblInput]="tbl" (rowClickEvent)="TrashClickEvent($event)"></app-table>
   <hr />
   <div
     *ngIf="showListRibbon"
