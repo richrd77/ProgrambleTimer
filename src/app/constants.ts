@@ -9,4 +9,8 @@ export class Constants {
   get RoutineKey(): string {
     return 'routine';
   }
+
+  get ModalHeaderKey(): string {
+    return 'modalHeader';
+  }
 }

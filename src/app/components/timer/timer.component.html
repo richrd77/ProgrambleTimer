@@ -1,10 +1,11 @@
 <div style="position: relative">
   <div class="glass-card">
     <div class="wrapper">
-      <app-moon-img class="dark-mode-toggler" (clickEventListener)="ChangeTheme()"></app-moon-img>
-      <div
-        class="main-timer"
-      >
+      <app-moon-img
+        class="dark-mode-toggler"
+        (clickEventListener)="ChangeTheme()"
+      ></app-moon-img>
+      <div class="main-timer">
         {{ DisplayTime() }}
       </div>
       <div class="ribbon">
@@ -49,27 +50,7 @@
           </a>
         </div>
         <div class="modal-body modal-theme-custom">
-          <div [ngSwitch]="menuItemName">
-            <div *ngSwitchCase="'New-Item'">
-              <app-new-interval
-                (newlyCreatedItem)="NewTimerEvent($event)"
-                [allInterval]="allInterval"
-                [existingColors]="allColors"
-              ></app-new-interval>
-            </div>
-            <div *ngSwitchCase="'list'">
-              <app-interval-list
-                [allInterval]="allInterval" (DisplayMessage)="ShowSuccessMessage($event)"
-                (ViewRoutineClick)="RibbonItemClickEvent($event)"
-              ></app-interval-list>
-            </div>
-            <div *ngSwitchCase="'view-routine'">
-              <app-view-routine></app-view-routine>
-            </div>
-            <div *ngSwitchCase="'view-graph'">
-              graph comes here
-            </div>
-          </div>
+          <app-animate-screen [screen1]="screen1" [screen2]="screen2" [toggleScreen]="toggleScreen" (syncToggleFlag)="SyncScreenAnimation($event)"></app-animate-screen>
         </div>
       </ng-template>
     </div>
@@ -84,5 +65,32 @@
       [ngStyle]="StyleProgress()"
     ></div>
   </div>
-  <app-message [Show]="showMessage" [Message]="message" [IsError]="isError"></app-message>
+  <app-message
+    [Show]="showMessage"
+    [Message]="message"
+    [IsError]="isError"
+  ></app-message>
 </div>
+<ng-template #newItem>
+  <app-new-interval
+    (newlyCreatedItem)="NewTimerEvent($event)"
+    [allInterval]="allInterval"
+    [existingColors]="allColors"
+  ></app-new-interval>
+</ng-template>
+
+<ng-template #list>
+  <app-interval-list
+    [allInterval]="allInterval"
+    (DisplayMessage)="ShowSuccessMessage($event)"
+    (ViewRoutineClick)="RibbonItemClickEvent($event)"
+  ></app-interval-list>
+</ng-template>
+
+<ng-template #routine>
+  <app-view-routine></app-view-routine>
+</ng-template>
+
+<ng-template #gr>
+  InProgress.. Coming Soon.
+</ng-template>

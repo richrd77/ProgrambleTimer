@@ -17,6 +17,18 @@ import { SaverService } from '../../services/saver.service';
   styleUrls: ['timer.component.scss', 'timer-mobile.component.scss'],
 })
 export class TimerComponent implements OnInit {
+  @ViewChild('newItem')
+  newItemTemplate: TemplateRef<any>;
+
+  @ViewChild('list')
+  listTemplate: TemplateRef<any>;
+
+  @ViewChild('routine')
+  routineTemplate: TemplateRef<any>;
+
+  @ViewChild('gr')
+  grTemplate: TemplateRef<any>;
+
   allInterval: Array<Timer>;
   allColors: Array<Color>;
   intervalStep = 5;
@@ -40,6 +52,10 @@ export class TimerComponent implements OnInit {
 
   @ViewChild('mymodal')
   private newItemModal: TemplateRef<any>;
+
+  screen1: TemplateRef<any>;
+  screen2: TemplateRef<any>;
+  toggleScreen: boolean;
 
   constructor(
     private modalService: NgbModal,
@@ -169,14 +185,26 @@ export class TimerComponent implements OnInit {
   RibbonItemClickEvent(name: string) {
     this.menuItemName = name;
     if (name === 'New-Item') {
-      this.modalHeader = 'New Interval';
+      this.ChangeModalHeader('New Interval', true);
+      this.screen1 = this.newItemTemplate;
+      this.screen2 = this.newItemTemplate;
+      this.toggleScreen = false;
       this.open(this.newItemModal);
     } else if (name === 'view-routine') {
       this.modalHeader = 'Routine';
+      this.screen1 = this.listTemplate;
+      this.screen2 = this.routineTemplate;
+      this.toggleScreen = !this.toggleScreen;
     } else if (name === 'view-graph') {
       this.modalHeader = 'Overview';
+      this.toggleScreen = !this.toggleScreen;
+      this.screen1 = this.listTemplate;
+      this.screen2 = this.grTemplate;
     } else {
-      this.modalHeader = 'List of Interval';
+      this.ChangeModalHeader('List of Interval', true);
+      this.toggleScreen = false;
+      this.screen1 = this.listTemplate;
+      this.screen2 = this.listTemplate;
       this.open(this.newItemModal);
     }
   }
@@ -235,5 +263,23 @@ export class TimerComponent implements OnInit {
     this.showMessage = true;
     this.isError = true;
     setTimeout(() => (this.showMessage = false), 2000);
+  }
+
+  ChangeScreenAnimation() {
+    this.toggleScreen = !this.toggleScreen;
+  }
+
+  SyncScreenAnimation(event: boolean) {
+    this.toggleScreen = event;
+    this.ChangeModalHeader('');
+  }
+
+  ChangeModalHeader(header: string, overrideHeader: boolean = false): void {
+    if (overrideHeader) {
+      this.saverService.ModalHeader = header;
+      this.modalHeader = header;
+    } else {
+      this.modalHeader = this.saverService.ModalHeader;
+    }
   }
 }

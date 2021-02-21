@@ -38,4 +38,12 @@ export class SaverService {
   GetRoutine(): Routine[] {
     return this.repo.GetDataFromDevice<Routine[]>(this.constants.RoutineKey);
   }
+
+  get ModalHeader() {
+    return this.repo.GetDataFromDevice<string>(this.constants.ModalHeaderKey);
+  }
+
+  set ModalHeader(newHeader: string) {
+    this.repo.SetDataFromDevice(this.constants.ModalHeaderKey, newHeader);
+  }
 }

@@ -32,6 +32,7 @@ import { ViewRoutineComponent } from './components/view-routine.component';
 import { PanelComponent } from './components/custom-controls/panel.component';
 import { GroupedTableComponent } from './components/grouped-table.component';
 import { GraphImgComponent } from './components/imgs/graph.component';
+import { AnimateScreenComponent } from './components/custom-controls/animate-screen.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { GraphImgComponent } from './components/imgs/graph.component';
     ViewRoutineComponent,
     PanelComponent,
     GroupedTableComponent,
-    GraphImgComponent
+    GraphImgComponent,
+    AnimateScreenComponent
   ],
   imports: [
     BrowserModule,
