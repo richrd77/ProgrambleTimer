@@ -80,15 +80,23 @@ export class Extensions {
     }
   }
 
-  GetFormattedTimeStamp(value: Date): string {
+  private GetFormattedTimeStamp(value: Date): string {
     const hh = value.getHours();
     const mm = value.getMinutes();
     if (hh > 12) {
-      return `${hh - 12}:${mm} PM`;
+      return `${this.AppendZero(hh - 12)}:${this.AppendZero(mm)} PM`;
     } else if (hh === 12) {
-      return `${hh}:${mm} PM`;
+      return `${this.AppendZero(hh)}:${this.AppendZero(mm)} PM`;
     } else {
-      return `${hh}:${mm} AM`;
+      return `${this.AppendZero(hh === 0 ? 12 : hh)}:${this.AppendZero(mm)} AM`;
+    }
+  }
+
+  private AppendZero = (val: number): string => {
+    if (val < 10) {
+      return `0${val}`;
+    } else {
+      return `${val}`;
     }
   }
 }

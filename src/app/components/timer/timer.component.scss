@@ -1,12 +1,14 @@
 .glass-card {
   background-color: transparent;
+  top: 50%;
+  transform: translateY(5%);
 }
 
 .wrapper {
-  height: 100vh;
+  height: 90vh;
   position: relative;
   border-radius: 2rem;
-  width: 90%;
+  width: 90vw;
   margin: auto;
   background: var(--bgColor);
   backdrop-filter: blur(5rem);
