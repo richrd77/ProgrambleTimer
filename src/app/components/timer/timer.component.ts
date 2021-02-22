@@ -10,6 +10,7 @@ import { Timer } from '../../model/timer';
 import { Color } from '../../model/color';
 import { Extensions } from '../../services/extensions';
 import { SaverService } from '../../services/saver.service';
+import { ImportRoutine } from '../../model/routine';
 
 @Component({
   selector: 'app-timer',
@@ -56,6 +57,8 @@ export class TimerComponent implements OnInit {
   screen1: TemplateRef<any>;
   screen2: TemplateRef<any>;
   toggleScreen: boolean;
+
+  importedRoutineName: string;
 
   constructor(
     private modalService: NgbModal,
@@ -297,9 +300,10 @@ export class TimerComponent implements OnInit {
     }
   }
 
-  ImportCycles(cycles: Timer[]): void {
+  ImportCycles(impRoutine: ImportRoutine): void {
     this.ClearThings();
-    this.allInterval = cycles.map((i) => new Timer(i.Name, i.Seconds, i.Color));
+    this.allInterval = impRoutine.cycles.map((i) => new Timer(i.Name, i.Seconds, i.Color));
+    this.importedRoutineName = impRoutine.routineName;
     this.RibbonItemClickEvent('whImportCycles');
   }
 

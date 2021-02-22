@@ -14,6 +14,7 @@ import { Timer } from '../model/timer';
         <app-grouped-table
           [routineCycle1]="c"
           [displayKeys]="displayKeys"
+          [routineName]="r.Name"
           (importClick)="ImportClicked($event)"
         ></app-grouped-table>
       </ng-container>

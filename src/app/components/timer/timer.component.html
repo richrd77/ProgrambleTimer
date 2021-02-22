@@ -82,6 +82,7 @@
 <ng-template #list>
   <app-interval-list
     [allInterval]="allInterval"
+    [importRoutineName]="importedRoutineName"
     (DisplayMessage)="ShowSuccessMessage($event)"
     (ViewRoutineClick)="RibbonItemClickEvent($event)"
     (DeleteTimerClick)="DeleteTimer($event)"

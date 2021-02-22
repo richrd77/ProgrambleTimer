@@ -6,7 +6,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { RoutineCycle } from '../model/routine';
+import { RoutineCycle, ImportRoutine } from '../model/routine';
 import { TableKey } from '../model/table';
 import { Timer } from '../model/timer';
 
@@ -46,7 +46,8 @@ import { Timer } from '../model/timer';
 export class GroupedTableComponent {
   @Input() routineCycle1: RoutineCycle;
   @Input() displayKeys: TableKey[];
-  @Output() importClick: EventEmitter<Timer[]> = new EventEmitter<Timer[]>();
+  @Input() routineName: string;
+  @Output() importClick: EventEmitter<ImportRoutine> = new EventEmitter<ImportRoutine>();
 
   @ViewChild('head', { static: true })
   header: TemplateRef<any>;
@@ -58,6 +59,6 @@ export class GroupedTableComponent {
   tblRibbon: TemplateRef<any>;
 
   btnClicked(event: any) {
-    this.importClick.emit(this.routineCycle1.Cycles);
+    this.importClick.emit(new ImportRoutine(this.routineName, this.routineCycle1.Cycles));
   }
 }

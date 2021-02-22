@@ -19,3 +19,13 @@ export class RoutineCycle {
     this.SavedOn = new Date();
   }
 }
+
+export class ImportRoutine {
+  routineName: string;
+  cycles: Timer[];
+
+  constructor(name: string, allCycles: Timer[]) {
+    this.routineName = name;
+    this.cycles = allCycles;
+  }
+}

@@ -24,7 +24,7 @@
       (text)="CatchTextEvent($event)"
     ></app-textbox>
     <div style="display: flex; justify-content: space-evenly; margin-top: 1rem">
-      <app-button [btnText]="'Save'" (btnClick)="SaveNewRoutine()"></app-button>
+      <app-button [btnText]="'Save'" (btnClick)="SaveNewRoutine(undefined)"></app-button>
       <app-button
         [btnText]="'Cancel'"
         (btnClick)="DoNotSaveNewRoutine()"

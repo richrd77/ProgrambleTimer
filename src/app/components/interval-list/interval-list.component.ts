@@ -24,6 +24,7 @@ import { TableColType } from 'src/app/model/enums/tableColumnTypes.enum';
 })
 export class IntervalListComponent implements OnInit, OnChanges {
   @Input() allInterval: Timer[];
+  @Input() importRoutineName: string;
   @Output() DisplayMessage: EventEmitter<string> = new EventEmitter<string>();
   @Output() ViewRoutineClick: EventEmitter<string> = new EventEmitter<string>();
   @Output() DeleteTimerClick: EventEmitter<Timer> = new EventEmitter<Timer>();
@@ -79,14 +80,24 @@ export class IntervalListComponent implements OnInit, OnChanges {
   }
 
   SaveImgClicked(e: any): void {
-    this.DisplayMessage.emit('Please provide routine Name');
-    this.viewRef.createEmbeddedView(this.routineTemplte);
-    this.showListRibbon = false;
+    if (this.importRoutineName) {
+      this.SaveNewRoutine(this.importRoutineName);
+    } else {
+      this.DisplayMessage.emit('Please provide routine Name');
+      this.viewRef.createEmbeddedView(this.routineTemplte);
+      this.showListRibbon = false;
+    }
   }
 
-  SaveNewRoutine(): void {
+  SaveNewRoutine(routineName: string): void {
+    let newRoutineName = '';
+    if (routineName) {
+      newRoutineName = routineName;
+    } else {
+      newRoutineName = this.routineName;
+    }
     this.saveService.SaveRoutine(
-      new Routine(this.routineName, [new RoutineCycle(this.allInterval)])
+      new Routine(newRoutineName, [new RoutineCycle(this.allInterval)])
     );
     this.DisplayMessage.emit('routine Saved!!!');
     this.DoNotSaveNewRoutine();
