@@ -72,7 +72,9 @@ export class TimerComponent implements OnInit {
     this.allColors = [];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.ToggleTheme(this.saverService.IsDarkModeOn);
+  }
 
   StartTimer(): void {
     this.currentItem = this.allInterval[this.currentIndex];
@@ -230,7 +232,7 @@ export class TimerComponent implements OnInit {
   }
 
   ChangeTheme(): void {
-    this.ToggleTheme(!this.saverService.IsDarkModeOn());
+    this.ToggleTheme(!this.saverService.IsDarkModeOn);
   }
 
   ToggleTheme(isDarkModeEnabled: boolean): void {

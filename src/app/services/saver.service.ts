@@ -7,7 +7,7 @@ import { Constants } from '../constants';
 export class SaverService {
   constructor(private repo: RepositoryService, private constants: Constants) {}
 
-  IsDarkModeOn(): boolean {
+  get IsDarkModeOn(): boolean {
     return this.repo.Theme;
   }
 
