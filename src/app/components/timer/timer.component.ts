@@ -73,7 +73,7 @@ export class TimerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ToggleTheme(this.saverService.IsDarkModeOn);
+    this.LoadTheme(this.saverService.IsDarkModeOn);
   }
 
   StartTimer(): void {
@@ -232,16 +232,16 @@ export class TimerComponent implements OnInit {
   }
 
   ChangeTheme(): void {
-    this.ToggleTheme(!this.saverService.IsDarkModeOn);
+    this.LoadTheme(!this.saverService.IsDarkModeOn);
+    this.saverService.ToggleDarkMode();
   }
 
-  ToggleTheme(isDarkModeEnabled: boolean): void {
+  LoadTheme(isDarkModeEnabled: boolean): void {
     if (isDarkModeEnabled) {
       this.renderer.addClass(document.body, 'dark-mode');
     } else {
       this.renderer.removeClass(document.body, 'dark-mode');
     }
-    this.saverService.ToggleDarkMode();
   }
 
   StartPlainTimer(): void {
