@@ -17,7 +17,7 @@ import * as InputModel from '../../model/input';
       .new-interval-holder:focus,
       .new-interval-holder:active {
         outline: 0;
-        box-shadow: var(--highlight-color) 0rem 0rem 0.75rem 0.01rem;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.08), 0 0 10px 2px var(--highlight-color);
       }
       .new-interval-holder {
         display: inline-block;
