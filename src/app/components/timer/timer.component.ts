@@ -64,7 +64,7 @@ export class TimerComponent implements OnInit {
     private modalService: NgbModal,
     private ext: Extensions,
     private renderer: Renderer2,
-    private saverService: SaverService
+    public saverService: SaverService
   ) {
     this.allInterval = [];
     this.intervalprogress = 0;
