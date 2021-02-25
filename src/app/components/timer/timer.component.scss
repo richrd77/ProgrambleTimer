@@ -11,7 +11,7 @@
   width: 90vw;
   margin: auto;
   background: var(--bgColor);
-  backdrop-filter: blur(5rem);
+  backdrop-filter: blur(var(--blur-val));
   user-select: none;
 }
 
