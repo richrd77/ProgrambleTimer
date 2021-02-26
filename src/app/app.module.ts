@@ -35,6 +35,7 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { TrashImgComponent } from './components/imgs/trash.component';
 import { ConfirmMessageComponent } from './components/dialogs/confirm-dialog.component';
 import { SunImgComponent } from './components/imgs/sun.component';
+import { ThemeComponent } from './components/custom-controls/theme-controller.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { SunImgComponent } from './components/imgs/sun.component';
     CustomDatePipe,
     TrashImgComponent,
     ConfirmMessageComponent,
-    SunImgComponent
+    SunImgComponent,
+    ThemeComponent
   ],
   imports: [
     BrowserModule,

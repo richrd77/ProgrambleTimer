@@ -17,7 +17,7 @@ import { ImportRoutine } from '../../model/routine';
   templateUrl: 'timer.component.html',
   styleUrls: ['timer.component.scss', 'timer-mobile.component.scss'],
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent {
   @ViewChild('newItem')
   newItemTemplate: TemplateRef<any>;
 
@@ -72,9 +72,6 @@ export class TimerComponent implements OnInit {
     this.allColors = [];
   }
 
-  ngOnInit(): void {
-    this.LoadTheme(this.saverService.IsDarkModeOn);
-  }
 
   StartTimer(): void {
     this.currentItem = this.allInterval[this.currentIndex];
@@ -229,19 +226,6 @@ export class TimerComponent implements OnInit {
     this.isRunning = false;
     this.isPlainTime = false;
     this.canaddNew = true;
-  }
-
-  ChangeTheme(): void {
-    this.LoadTheme(!this.saverService.IsDarkModeOn);
-    this.saverService.ToggleDarkMode();
-  }
-
-  LoadTheme(isDarkModeEnabled: boolean): void {
-    if (isDarkModeEnabled) {
-      this.renderer.addClass(document.body, 'dark-mode');
-    } else {
-      this.renderer.removeClass(document.body, 'dark-mode');
-    }
   }
 
   StartPlainTimer(): void {

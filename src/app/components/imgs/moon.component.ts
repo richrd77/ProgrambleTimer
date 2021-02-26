@@ -3,7 +3,7 @@ import {
   EventEmitter,
   Input,
   Output,
-  OnInit,
+  OnInit
 } from '@angular/core';
 
 @Component({
@@ -35,7 +35,7 @@ import {
     `,
   ],
 })
-export class MoonImgComponent implements OnInit {
+export class MoonImgComponent {
   @Input() imgColor: string;
   @Input() disabled: boolean;
   @Output() clickEventListener: EventEmitter<any>;
@@ -43,17 +43,13 @@ export class MoonImgComponent implements OnInit {
   constructor() {
     this.clickEventListener = new EventEmitter<any>();
   }
-  ngOnInit(): void {
-    if (this.disabled) {
-      this.imgColor = 'grey';
-    } else {
-      this.imgColor = 'black';
-    }
-  }
 
   clickEvent(e: any): void {
     if (!this.disabled) {
       this.clickEventListener.emit(e);
+      document
+        .getElementsByClassName('moon-img-class')[0]
+        .classList.toggle('theme-focus');
     }
   }
 }

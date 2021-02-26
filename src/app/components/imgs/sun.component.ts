@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 
 @Component({
-  selector: "app-sun-img",
+  selector: 'app-sun-img',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -29,10 +29,6 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
         }
       }
 
-      .sun-img-class:hover {
-        animation: rotate 5s ease-in-out 0s infinite;
-      }
-
       @keyframes rotate {
         0% {
           transform: rotate(0deg);
@@ -55,6 +51,9 @@ export class SunImgComponent {
 
   clickEvent(e: any): void {
     if (!this.disabled) {
+      document
+        .getElementsByClassName('sun-img-class')[0]
+        .classList.toggle('theme-focus');
       this.clickEventListener.emit(e);
     }
   }

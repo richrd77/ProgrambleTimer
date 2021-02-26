@@ -125,3 +125,17 @@ svg:hover {
   animation-duration: 1s;
   animation-iteration-count: infinite;
 }
+
+.theme-focus {
+  animation: spin 0.5s linear 1;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+}

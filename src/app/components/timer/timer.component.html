@@ -1,14 +1,7 @@
 <div style="position: relative; height: 100%;">
   <div class="glass-card">
     <div class="wrapper">
-      <app-sun-img *ngIf="saverService.IsDarkModeOn"
-        class="dark-mode-toggler"
-        (clickEventListener)="ChangeTheme()"
-      ></app-sun-img>
-      <app-moon-img *ngIf="!saverService.IsDarkModeOn"
-        class="dark-mode-toggler"
-        (clickEventListener)="ChangeTheme()"
-      ></app-moon-img>
+      <app-theme class="dark-mode-toggler"></app-theme>
       <div class="main-timer">
         {{ DisplayTime() }}
       </div>
