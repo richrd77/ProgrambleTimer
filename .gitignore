@@ -46,3 +46,4 @@ testem.log
 Thumbs.db
 /platforms/android
 /www
+/.vs*
