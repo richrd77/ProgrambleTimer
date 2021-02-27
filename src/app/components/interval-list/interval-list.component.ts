@@ -16,6 +16,7 @@ import { EventEmitter } from '@angular/core';
 import * as InputModel from '../../model/input';
 import { TableInputs, TableKey } from 'src/app/model/table';
 import { TableColType } from 'src/app/model/enums/tableColumnTypes.enum';
+import { RoutineService } from '../../services/routine.service';
 
 @Component({
   selector: 'app-interval-list',
@@ -25,9 +26,11 @@ import { TableColType } from 'src/app/model/enums/tableColumnTypes.enum';
 export class IntervalListComponent implements OnInit, OnChanges {
   @Input() allInterval: Timer[];
   @Input() importRoutineName: string;
+  @Input() saveReset: boolean;
   @Output() DisplayMessage: EventEmitter<string> = new EventEmitter<string>();
   @Output() ViewRoutineClick: EventEmitter<string> = new EventEmitter<string>();
   @Output() DeleteTimerClick: EventEmitter<Timer> = new EventEmitter<Timer>();
+  @Output() SaveRestEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   routineName: string;
   showListRibbon: boolean;
@@ -42,7 +45,8 @@ export class IntervalListComponent implements OnInit, OnChanges {
 
   constructor(
     private saveService: SaverService,
-    private viewRef: ViewContainerRef
+    private viewRef: ViewContainerRef,
+    private rService: RoutineService
   ) {
     this.showListRibbon = true;
     this.routineNameInput = new InputModel.Input('text');
@@ -96,17 +100,22 @@ export class IntervalListComponent implements OnInit, OnChanges {
     } else {
       newRoutineName = this.routineName;
     }
-    this.saveService.SaveRoutine(
-      new Routine(newRoutineName, [new RoutineCycle(this.allInterval)])
-    );
+    this.rService.SaveNewRoutine(newRoutineName, this.allInterval);
     this.DisplayMessage.emit('routine Saved!!!');
     this.DoNotSaveNewRoutine();
+    this.SaveRest();
   }
 
   DoNotSaveNewRoutine(): void {
     this.routineName = '';
     this.showListRibbon = true;
     this.viewRef.clear();
+  }
+
+  SaveRest(): void {
+    if (this.saveReset) {
+      this.SaveRestEvent.emit(true);
+    }
   }
 
   CatchTextEvent(event: any): void {

@@ -24,7 +24,7 @@
           ></app-pause-img>
           <app-refresh-img
             [imgColor]="'black'"
-            (click)="ClearThings()"
+            (click)="ClearThings('Yes')"
           ></app-refresh-img>
           <app-list-img
             [imgColor]="'black'"
@@ -80,9 +80,11 @@
   <app-interval-list
     [allInterval]="allInterval"
     [importRoutineName]="importedRoutineName"
+    [saveReset]="saveReset"
     (DisplayMessage)="ShowSuccessMessage($event)"
     (ViewRoutineClick)="RibbonItemClickEvent($event)"
     (DeleteTimerClick)="DeleteTimer($event)"
+    (SaveRestEvent)="ClearThings('Now')"
   ></app-interval-list>
 </ng-template>
 

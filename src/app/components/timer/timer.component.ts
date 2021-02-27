@@ -11,6 +11,7 @@ import { Color } from '../../model/color';
 import { Extensions } from '../../services/extensions';
 import { SaverService } from '../../services/saver.service';
 import { ImportRoutine } from '../../model/routine';
+import { RoutineService } from '../../services/routine.service';
 
 @Component({
   selector: 'app-timer',
@@ -59,19 +60,20 @@ export class TimerComponent {
   toggleScreen: boolean;
 
   importedRoutineName: string;
+  saveReset: boolean;
 
   constructor(
     private modalService: NgbModal,
     private ext: Extensions,
     private renderer: Renderer2,
-    public saverService: SaverService
+    public saverService: SaverService,
+    private rService: RoutineService
   ) {
     this.allInterval = [];
     this.intervalprogress = 0;
     this.currentIndex = 0;
     this.allColors = [];
   }
-
 
   StartTimer(): void {
     this.currentItem = this.allInterval[this.currentIndex];
@@ -213,7 +215,40 @@ export class TimerComponent {
     }
   }
 
-  ClearThings(): void {
+  ClearThings(getConfirmation: string): void {
+    if (
+      getConfirmation &&
+      getConfirmation === 'Yes' &&
+      this.allInterval.length > 0
+    ) {
+      const confirmMessageEnd = this.importedRoutineName
+        ? this.importedRoutineName
+        : 'new Routine';
+      const choice = confirm(
+        `would you like to save this as ${confirmMessageEnd}??`
+      );
+      if (choice && this.importedRoutineName) {
+        this.rService.SaveNewRoutine(
+          this.importedRoutineName,
+          this.allInterval
+        );
+        this.Reset();
+      } else if (choice) {
+        clearInterval(this.timerIntervalId);
+        this.saveReset = true;
+        this.RibbonItemClickEvent('sh');
+      } else {
+        this.Reset();
+      }
+    } else if (getConfirmation && getConfirmation === 'Now') {
+      this.Reset();
+      this.saveReset = false;
+    } else {
+      this.Reset();
+    }
+  }
+
+  private Reset(): void {
     this.mainTimerSeconds = 0;
     this.mainTimerMinutes = 0;
     this.mainTimerHours = 0;
@@ -226,6 +261,7 @@ export class TimerComponent {
     this.isRunning = false;
     this.isPlainTime = false;
     this.canaddNew = true;
+    this.importedRoutineName = '';
   }
 
   StartPlainTimer(): void {
@@ -282,13 +318,15 @@ export class TimerComponent {
     );
 
     if (this.allInterval.length === 0) {
-      this.ClearThings();
+      this.ClearThings(undefined);
     }
   }
 
   ImportCycles(impRoutine: ImportRoutine): void {
-    this.ClearThings();
-    this.allInterval = impRoutine.cycles.map((i) => new Timer(i.Name, i.Seconds, i.Color));
+    this.ClearThings(undefined);
+    this.allInterval = impRoutine.cycles.map(
+      (i) => new Timer(i.Name, i.Seconds, i.Color)
+    );
     this.importedRoutineName = impRoutine.routineName;
     this.RibbonItemClickEvent('whImportCycles');
   }

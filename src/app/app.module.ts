@@ -36,6 +36,7 @@ import { TrashImgComponent } from './components/imgs/trash.component';
 import { ConfirmMessageComponent } from './components/dialogs/confirm-dialog.component';
 import { SunImgComponent } from './components/imgs/sun.component';
 import { ThemeComponent } from './components/custom-controls/theme-controller.component';
+import { RoutineService } from './services/routine.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,7 @@ import { ThemeComponent } from './components/custom-controls/theme-controller.co
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [Extensions, SaverService, Constants, RepositoryService],
+  providers: [Extensions, SaverService, Constants, RepositoryService, RoutineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

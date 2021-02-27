@@ -38,7 +38,7 @@ export class ThemeComponent implements OnInit {
   ChangeTheme(): void {
     setTimeout(() => {
       this.isMoon = !this.isMoon;
-    }, 500);
+    }, 250);
     this.LoadTheme(!this.saverService.IsDarkModeOn);
     this.saverService.ToggleDarkMode();
   }
