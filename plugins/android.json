@@ -7,10 +7,10 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-vibration": {
       "PACKAGE_NAME": "com.richard.programabletimer"
     },
-    "cordova-plugin-vibration": {
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.richard.programabletimer"
     }
   },
