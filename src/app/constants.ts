@@ -13,4 +13,8 @@ export class Constants {
   get ModalHeaderKey(): string {
     return 'modalHeader';
   }
+
+  get SettingKey(): string {
+    return 'settings';
+  }
 }

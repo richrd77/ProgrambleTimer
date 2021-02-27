@@ -14,9 +14,13 @@ export class RoutineCycle {
   Cycles: Timer[];
   SavedOn: Date;
 
-  constructor(allCycles: Timer[]) {
+  constructor(allCycles: Timer[], date: Date = null) {
     this.Cycles = allCycles;
-    this.SavedOn = new Date();
+    if (date) {
+      this.SavedOn = date;
+    } else {
+      this.SavedOn = new Date();
+    }
   }
 }
 
