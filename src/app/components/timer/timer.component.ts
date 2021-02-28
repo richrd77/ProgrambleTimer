@@ -12,13 +12,14 @@ import { Extensions } from '../../services/extensions';
 import { SaverService } from '../../services/saver.service';
 import { ImportRoutine } from '../../model/routine';
 import { RoutineService } from '../../services/routine.service';
+import { SettingService } from '../../services/setting.service';
 
 @Component({
   selector: 'app-timer',
   templateUrl: 'timer.component.html',
   styleUrls: ['timer.component.scss', 'timer-mobile.component.scss'],
 })
-export class TimerComponent {
+export class TimerComponent implements OnInit {
   @ViewChild('newItem')
   newItemTemplate: TemplateRef<any>;
 
@@ -63,18 +64,22 @@ export class TimerComponent {
   saveReset: boolean;
 
   showSettings: boolean;
-
+  settingClickCount = 0;
   constructor(
     private modalService: NgbModal,
     private ext: Extensions,
     private renderer: Renderer2,
     public saverService: SaverService,
-    private rService: RoutineService
+    private rService: RoutineService,
+    private sService: SettingService
   ) {
     this.allInterval = [];
     this.intervalprogress = 0;
     this.currentIndex = 0;
     this.allColors = [];
+  }
+  ngOnInit(): void {
+    this.rService.DeleteOldRoutine();
   }
 
   StartTimer(): void {
@@ -154,6 +159,9 @@ export class TimerComponent {
       // this.currentItem.Color = this.getRandomColor();
       this.mainTimerSecondsRaw = 0;
       this.ext.beep();
+      if (this.sService.Settings.VibrateEachCycleComplition) {
+        navigator.vibrate(this.sService.Settings.VibrationDuration * 1000);
+      }
     }
     // chnge hrdcoded 60 to intervl seconds
     this.intervalprogress =
@@ -338,9 +346,15 @@ export class TimerComponent {
   }
 
   ShowSettingsEvent(): void {
-    this.showSettings = true;
-    setTimeout(() => {
-      this.showSettings = false;
-    }, 50);
+    this.settingClickCount++;
+    if (this.settingClickCount === 5) {
+      this.showSettings = true;
+      this.settingClickCount = 0;
+      setTimeout(() => {
+        this.showSettings = false;
+      }, 50);
+    } else {
+      this.ShowSuccessMessage(`click ${5 - this.settingClickCount} times to open Settings`);
+    }
   }
 }

@@ -61,7 +61,10 @@ export class SaverService {
       .forEach((v) => {
         let newRoutineCycle: RoutineCycle[] = [];
         v.Cycles.forEach((r) => {
-          if (this.ext.MonthDiff(r.SavedOn, currentDate) <= difference) {
+          if (
+            this.ext.MonthDiff(new Date(r.SavedOn), new Date(currentDate)) <=
+            difference
+          ) {
             newRoutineCycle.push(new RoutineCycle(r.Cycles, r.SavedOn));
           }
         });

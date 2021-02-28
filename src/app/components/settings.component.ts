@@ -23,7 +23,7 @@ import * as ip from '../model/input';
       <div class="setting-content-wrapper">
         <div class="setting-content-itself">
           <label>
-            specifiy how many months data to retain
+            specifiy how many months data to retain (in Months)
             <app-textbox
               [inputProperties]="archivingInputProperties"
               [initialValue]="archivingInitialValue"

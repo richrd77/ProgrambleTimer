@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Routine, RoutineCycle } from '../model/routine';
 import { SaverService } from './saver.service';
 import { Timer } from '../model/timer';
+import { SettingService } from './setting.service';
 
 @Injectable()
 export class RoutineService {
-  DiffMonths = 2;
-  constructor(private saveService: SaverService) {}
+  constructor(private saveService: SaverService, private settingsService: SettingService) {}
 
   SaveNewRoutine(routineName: string, allInterval: Timer[]): void {
     this.saveService.SaveRoutine(
@@ -15,6 +15,6 @@ export class RoutineService {
   }
 
   DeleteOldRoutine(): void {
-    this.saveService.DeleteOldData(this.DiffMonths);
+    this.saveService.DeleteOldData(this.settingsService.Settings.AutoDeleteOldRecordsDuration);
   }
 }
