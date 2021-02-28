@@ -97,6 +97,7 @@ import * as ip from '../model/input';
         border-radius: 2rem;
         padding: 1rem;
         color: var(--controls-color);
+        overflow-y: auto;
       }
 
       .settings-back {
@@ -111,7 +112,7 @@ import * as ip from '../model/input';
 
       .setting-content-wrapper {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         justify-items: center;
         grid-gap: 0;
       }
