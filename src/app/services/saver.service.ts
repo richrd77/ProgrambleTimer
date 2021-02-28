@@ -58,7 +58,7 @@ export class SaverService {
     const currentDate = new Date();
     this.repo
       .GetDataFromDevice<Routine[]>(this.constants.RoutineKey)
-      .forEach((v) => {
+      ?.forEach((v) => {
         let newRoutineCycle: RoutineCycle[] = [];
         v.Cycles.forEach((r) => {
           if (

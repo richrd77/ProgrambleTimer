@@ -40,7 +40,7 @@ import * as InputModel from '../../model/input';
 })
 export class TextBoxComponent {
   @Input() inputProperties: InputModel.Input;
-  @Input() initialValue: string;
+  @Input() initialValue = '';
   @Output() text: EventEmitter<string> = new EventEmitter<string>();
 
   ChangeEvent(event: any) {
