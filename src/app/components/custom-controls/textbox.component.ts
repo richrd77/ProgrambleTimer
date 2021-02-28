@@ -9,6 +9,7 @@ import * as InputModel from '../../model/input';
       class="new-interval-holder"
       [ngClass]="{ 'seven-segment': inputProperties.IsSevenSegmentFont }"
       [attr.placeholder]="inputProperties.PlaceHolder"
+      [value]="initialValue"
       (input)="ChangeEvent($event)"
     />
   `,
@@ -39,6 +40,7 @@ import * as InputModel from '../../model/input';
 })
 export class TextBoxComponent {
   @Input() inputProperties: InputModel.Input;
+  @Input() initialValue: string;
   @Output() text: EventEmitter<string> = new EventEmitter<string>();
 
   ChangeEvent(event: any) {

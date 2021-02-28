@@ -38,6 +38,8 @@ import { SunImgComponent } from './components/imgs/sun.component';
 import { ThemeComponent } from './components/custom-controls/theme-controller.component';
 import { RoutineService } from './services/routine.service';
 import { SettingService } from './services/setting.service';
+import { SettingsComponent } from './components/settings.component';
+import { CustomChoiceComponent } from './components/custom-controls/custom-choice.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { SettingService } from './services/setting.service';
     TrashImgComponent,
     ConfirmMessageComponent,
     SunImgComponent,
-    ThemeComponent
+    ThemeComponent,
+    SettingsComponent,
+    CustomChoiceComponent
   ],
   imports: [
     BrowserModule,

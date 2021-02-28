@@ -35,7 +35,7 @@
   color: var(--controls-color);
   background-color: transparent;
   position: relative;
-  pointer-events: none;
+  pointer-events: stroke;
 }
 
 .dark-mode-toggler {
@@ -45,6 +45,7 @@
   width: 2rem;
   height: 2rem;
   cursor: pointer;
+  z-index: 2;
 }
 
 .ribbon {

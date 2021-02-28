@@ -8,14 +8,22 @@ export class SettingService {
   constructor(private cons: Constants, private repo: RepositoryService) {}
 
   get Settings(): Settings {
-    return this.repo.GetDataFromDevice<Settings>(this.cons.SettingKey);
+    let sett = this.repo.GetDataFromDevice<Settings>(this.cons.SettingKey);
+    if (!sett) {
+      sett = this.DefaultSettings;
+    }
+    return sett;
   }
 
   set Settings(newSettings: Settings) {
-    let existingSettings = this.Settings;
-    Object.keys(Settings).forEach((k) => {
-        existingSettings[k] = newSettings[k] ?? existingSettings[k];
-    });
-    this.repo.SetDataFromDevice(this.cons.SettingKey, existingSettings);
+    this.repo.SetDataFromDevice(this.cons.SettingKey, newSettings);
+  }
+
+  get DefaultSettings(): Settings {
+    const def = new Settings();
+    def.AutoDeleteOldRecordsDuration = 2;
+    def.VibrateEachCycleComplition = true;
+    def.VibrationDuration = 1;
+    return def;
   }
 }

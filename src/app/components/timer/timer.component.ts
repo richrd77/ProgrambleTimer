@@ -62,6 +62,8 @@ export class TimerComponent {
   importedRoutineName: string;
   saveReset: boolean;
 
+  showSettings: boolean;
+
   constructor(
     private modalService: NgbModal,
     private ext: Extensions,
@@ -333,5 +335,12 @@ export class TimerComponent {
 
   get IsModalOpen(): boolean {
     return document.body.classList.contains('modal-open');
+  }
+
+  ShowSettingsEvent(): void {
+    this.showSettings = true;
+    setTimeout(() => {
+      this.showSettings = false;
+    }, 50);
   }
 }
