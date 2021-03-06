@@ -40,6 +40,7 @@ import { RoutineService } from './services/routine.service';
 import { SettingService } from './services/setting.service';
 import { SettingsComponent } from './components/settings.component';
 import { CustomChoiceComponent } from './components/custom-controls/custom-choice.component';
+import { VoiceService } from './services/voice.service';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,7 @@ import { CustomChoiceComponent } from './components/custom-controls/custom-choic
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [Extensions, SaverService, Constants, RepositoryService, RoutineService, SettingService],
+  providers: [Extensions, SaverService, Constants, RepositoryService, RoutineService, SettingService, VoiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

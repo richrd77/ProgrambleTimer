@@ -9,6 +9,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import * as ip from '../model/input';
+import { Constants } from '../constants';
+import { Culture } from '../model/culture';
 
 @Component({
   selector: 'app-settings',
@@ -48,6 +50,17 @@ import * as ip from '../model/input';
               (text)="TextCapture('vibration', $event)"
             ></app-textbox>
           </label>
+        </div>
+        <div class="setting-content-itself">
+          <label> TimeZone: {{ TimeZoneName }} </label>
+          <select class="culture-ddl" [(ngModel)]="timeZone.Id">
+            <option
+              *ngFor="let c of cons.Cultures"
+              [value]="c.Id"
+            >
+              {{ c.Name }}
+            </option>
+          </select>
         </div>
       </div>
       <div style="width: 7rem;float: right;margin-right: 2rem;">
@@ -127,6 +140,14 @@ import * as ip from '../model/input';
         border-radius: 1em;
         border: var(--controls-color) 0.1rem dashed;
       }
+
+      .culture-ddl {
+        font-size: 2rem;
+        width: -moz-available; /* WebKit-based browsers will ignore this. */
+        width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+        width: fill-available;
+        border: 0.1rem solid var(--controls-color);
+      }
     `,
   ],
 })
@@ -140,8 +161,13 @@ export class SettingsComponent implements OnInit, OnChanges {
   archivingInitialValue: string;
   vibrationInitialValue: string;
   vibrationEnabled: boolean;
+  timeZone: Culture;
 
-  constructor(private rend: Renderer2, private sService: SettingService) {
+  constructor(
+    private rend: Renderer2,
+    private sService: SettingService,
+    public cons: Constants
+  ) {
     this.archivingInputProperties = new ip.Input('number');
     this.vibrationInputProperties = new ip.Input('number');
   }
@@ -149,6 +175,7 @@ export class SettingsComponent implements OnInit, OnChanges {
     this.archivingInitialValue = this.sService.Settings.AutoDeleteOldRecordsDuration.toString();
     this.vibrationInitialValue = this.sService.Settings.VibrationDuration.toString();
     this.vibrationEnabled = this.sService.Settings.VibrateEachCycleComplition;
+    this.timeZone = this.sService.Settings.TimeZone;
     if (this.showSettings) {
       // this.allSettings = this.sService.Settings;
       this.ToggleSettings(false);
@@ -193,7 +220,14 @@ export class SettingsComponent implements OnInit, OnChanges {
     newSet.AutoDeleteOldRecordsDuration = Number(this.archivingInitialValue);
     newSet.VibrationDuration = Number(this.vibrationInitialValue);
     newSet.VibrateEachCycleComplition = this.vibrationEnabled;
+    newSet.TimeZone = this.timeZone;
     this.sService.Settings = newSet;
     this.ToggleSettings(true);
+  }
+
+  get TimeZoneName(): string {
+    const foundOne = this.cons.Cultures.find(c => c.Id === this.timeZone.Id);
+    this.timeZone.Name = foundOne.Name;
+    return foundOne.Name;
   }
 }

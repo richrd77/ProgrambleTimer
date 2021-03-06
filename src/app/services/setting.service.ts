@@ -19,11 +19,18 @@ export class SettingService {
     this.repo.SetDataFromDevice(this.cons.SettingKey, newSettings);
   }
 
+  get TimeZoneLocale(): string {
+    return this.cons.Cultures.filter(
+      (c) => c.Name === this.Settings.TimeZone.Name
+    )[0].Id;
+  }
+
   get DefaultSettings(): Settings {
     const def = new Settings();
     def.AutoDeleteOldRecordsDuration = 2;
     def.VibrateEachCycleComplition = true;
     def.VibrationDuration = 1;
+    def.TimeZone = this.cons.Cultures[0];
     return def;
   }
 }
