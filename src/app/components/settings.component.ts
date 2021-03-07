@@ -1,19 +1,19 @@
-import { OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { SettingService } from '../services/setting.service';
-import { Settings } from '../model/settings';
+import { OnChanges, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { SettingService } from "../services/setting.service";
+import { Settings } from "../model/settings";
 import {
   Component,
   ElementRef,
   Input,
   Renderer2,
   ViewChild,
-} from '@angular/core';
-import * as ip from '../model/input';
-import { Constants } from '../constants';
-import { Culture } from '../model/culture';
+} from "@angular/core";
+import * as ip from "../model/input";
+import { Constants } from "../constants";
+import { Culture } from "../model/culture";
 
 @Component({
-  selector: 'app-settings',
+  selector: "app-settings",
   template: `
     <div #settingswrapper class="settings-wrapper">
       <div class="settings-header">
@@ -54,10 +54,7 @@ import { Culture } from '../model/culture';
         <div class="setting-content-itself">
           <label> TimeZone: {{ TimeZoneName }} </label>
           <select class="culture-ddl" [(ngModel)]="timeZone.Id">
-            <option
-              *ngFor="let c of cons.Cultures"
-              [value]="c.Id"
-            >
+            <option *ngFor="let c of cons.Cultures" [value]="c.Id">
               {{ c.Name }}
             </option>
           </select>
@@ -115,7 +112,7 @@ import { Culture } from '../model/culture';
 
       .settings-back {
         transform: translate(-50%, 5%);
-        transition: transform 0.35s ease-in-out;
+        transition: transform 0.5s ease-in-out;
       }
 
       .hide-back {
@@ -152,7 +149,7 @@ import { Culture } from '../model/culture';
   ],
 })
 export class SettingsComponent implements OnInit, OnChanges {
-  @Input() showSettings: boolean;
+  @Output() settingsHidden: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // allSettings: Settings;
   archivingInputProperties: ip.Input;
@@ -168,45 +165,45 @@ export class SettingsComponent implements OnInit, OnChanges {
     private sService: SettingService,
     public cons: Constants
   ) {
-    this.archivingInputProperties = new ip.Input('number');
-    this.vibrationInputProperties = new ip.Input('number');
+    this.archivingInputProperties = new ip.Input("number");
+    this.vibrationInputProperties = new ip.Input("number");
   }
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnInit(): void {
+    // if (this.showSettings) {
+    //   this.ToggleSettings(false);
+    // }
     this.archivingInitialValue = this.sService.Settings.AutoDeleteOldRecordsDuration.toString();
     this.vibrationInitialValue = this.sService.Settings.VibrationDuration.toString();
     this.vibrationEnabled = this.sService.Settings.VibrateEachCycleComplition;
     this.timeZone = this.sService.Settings.TimeZone;
-    if (this.showSettings) {
-      // this.allSettings = this.sService.Settings;
-      this.ToggleSettings(false);
-    }
-  }
-  ngOnInit(): void {
-    if (this.showSettings) {
-      this.ToggleSettings(false);
-    }
+    // this.allSettings = this.sService.Settings;
+    this.ToggleSettings(false);
   }
 
   ToggleSettings(remove: boolean): void {
-    const settingsDiv = document.getElementsByClassName('settings-wrapper')[0];
-    const glass = document.querySelector('.glass-card');
-    settingsDiv.classList.toggle('settings-back');
+    const settingsDiv = document.getElementsByClassName("settings-wrapper")[0];
+    const glass = document.querySelector(".glass-card");
+    setTimeout(() => {
+      settingsDiv.classList.toggle("settings-back");
+    }, 50);
 
     if (remove) {
-      this.rend.removeClass(glass, 'blur-in');
-      settingsDiv.classList.toggle('hide-back');
+      this.rend.removeClass(glass, "blur-in");
+      settingsDiv.classList.toggle("hide-back");
+      this.settingsHidden.emit(true);
       setTimeout(() => {
-        settingsDiv.classList.toggle('hide-back');
-      }, 500);
+        settingsDiv.classList.toggle("hide-back");
+      }, 5000);
     } else {
-      this.rend.addClass(glass, 'blur-in');
+      this.rend.addClass(glass, "blur-in");
     }
   }
 
   TextCapture(type: string, val: string): void {
-    if (type === 'vibration') {
+    if (type === "vibration") {
       this.vibrationInitialValue = val;
-    } else if (type === 'archive') {
+    } else if (type === "archive") {
       this.archivingInitialValue = val;
     }
   }
@@ -226,7 +223,7 @@ export class SettingsComponent implements OnInit, OnChanges {
   }
 
   get TimeZoneName(): string {
-    const foundOne = this.cons.Cultures.find(c => c.Id === this.timeZone.Id);
+    const foundOne = this.cons.Cultures.find((c) => c.Id === this.timeZone.Id);
     this.timeZone.Name = foundOne.Name;
     return foundOne.Name;
   }

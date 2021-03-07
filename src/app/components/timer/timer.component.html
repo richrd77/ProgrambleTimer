@@ -52,7 +52,7 @@
       </ng-template>
     </div>
   </div>
-  <app-settings [showSettings]="showSettings"></app-settings>
+  <app-settings *ngIf="showSettings" (settingsHidden)="SettingsHiddenEvent($event)"></app-settings>
   <div class="progress interval-progress" style="border-radius: 0">
     <div
       class="progress-bar"

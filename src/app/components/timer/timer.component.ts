@@ -3,7 +3,6 @@ import {
   OnInit,
   TemplateRef,
   ViewChild,
-  Renderer2,
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Timer } from '../../model/timer';
@@ -34,7 +33,6 @@ export class TimerComponent implements OnInit {
 
   allInterval: Array<Timer>;
   allColors: Array<Color>;
-  intervalStep = 5;
   mainTimerSeconds = 0;
   mainTimerMinutes = 0;
   mainTimerHours = 0;
@@ -68,7 +66,6 @@ export class TimerComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private ext: Extensions,
-    private renderer: Renderer2,
     public saverService: SaverService,
     private rService: RoutineService,
     private sService: SettingService
@@ -346,15 +343,19 @@ export class TimerComponent implements OnInit {
   }
 
   ShowSettingsEvent(): void {
-    this.settingClickCount++;
     if (this.settingClickCount === 5) {
       this.showSettings = true;
       this.settingClickCount = 0;
-      setTimeout(() => {
-        this.showSettings = false;
-      }, 50);
     } else {
       this.ShowSuccessMessage(`click ${5 - this.settingClickCount} times to open Settings`);
+      this.settingClickCount++;
     }
+  }
+  
+  SettingsHiddenEvent(e: boolean): void {
+    setTimeout(() => {
+      this.settingClickCount = 0;
+      this.showSettings = false;
+    }, 500);
   }
 }

@@ -14,7 +14,6 @@ export class NewIntervalComponent implements OnInit {
   newIntervalFormGroup: FormGroup;
   validationStatus: boolean;
   validationMessage: string;
-  intervalStep = 5;
   clicked = false;
   isMultiplyRequired: boolean;
   intervalInputModel: InputModel.Input;
@@ -67,20 +66,6 @@ export class NewIntervalComponent implements OnInit {
   ClearValidationError() {
     this.validationStatus = true;
     this.validationMessage = '';
-  }
-
-  IncreaseInterval() {
-    this.NewInterval.setValue(
-      Number(this.NewInterval.value) + this.intervalStep
-    );
-  }
-
-  DecreaseInterval() {
-    if (Number(this.NewInterval.value) > 0) {
-      this.NewInterval.setValue(
-        Number(this.NewInterval.value) - this.intervalStep
-      );
-    }
   }
 
   AddNewInterval(): void {
